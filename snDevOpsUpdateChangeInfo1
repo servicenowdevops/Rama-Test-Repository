@@ -3,7 +3,7 @@ def stageName = "STAGE"
 def ciPipelineName = "CI_Pipeline"
 def currPipelineName = "CD_Pipeline"
 def currStageName = "none"
-def ciBuildNumber = "13"
+def ciBuildNumber = "27"
 pipeline {
     agent any
 
