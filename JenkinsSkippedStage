@@ -1,0 +1,32 @@
+pipeline {
+	agent any
+	tools {
+		maven "Maven"
+	}
+	stages {
+		stage('Build') {
+			when {
+				1 = 1
+			}
+			steps {
+				echo 'Running build stage'
+			}
+		}
+		stage('Test') {
+			when {
+				1 = 1
+			}
+			steps {
+				echo 'Running test stage'
+			}
+		}
+		stage('Deploy') {
+			when {
+				1 = 1
+			}
+			steps {
+				echo 'Running deploy stage'
+			}
+		}
+	}
+}
