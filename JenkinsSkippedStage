@@ -6,7 +6,7 @@ pipeline {
 	stages {
 		stage('Build') {
 			when {
-				1 = 1
+				equals expected: 2, actual: 2
 			}
 			steps {
 				echo 'Running build stage'
@@ -14,7 +14,7 @@ pipeline {
 		}
 		stage('Test') {
 			when {
-				1 = 1
+				equals expected: 2, actual: 2
 			}
 			steps {
 				echo 'Running test stage'
@@ -22,7 +22,7 @@ pipeline {
 		}
 		stage('Deploy') {
 			when {
-				1 = 1
+				equals expected: 2, actual: 2
 			}
 			steps {
 				echo 'Running deploy stage'
