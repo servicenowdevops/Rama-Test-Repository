@@ -276,6 +276,20 @@ jobs:
 #             - name: Run deployment scripts
 #               run: echo Completed Deployment
 
+            - name: Custom Action Get Step
+                    uses: maheshganji/custom-action-get@main    
+                    # Uses an action in the root directory
+                    id: get
+                    with:
+                      devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
+                      devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
+                      instance-url: ${{ secrets.SN_INSTANCE_URL }}
+                      context-github: ${{ toJSON(github) }}
+                      tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+                      change-details: '{"build_number":"","pipeline_name":"","stage_name":"Deploy"}' #Working Version
+
+
+
     postdeploy:
         #if: github.event.pull_request.merged == true
         name: Post Deploy
