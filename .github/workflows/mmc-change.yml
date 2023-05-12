@@ -17,6 +17,6 @@ jobs:
           tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
           context-github: ${{ toJSON(github) }}
           job-name: 'ServiceNow Change Approval'
-          change-request: '{"setCloseCode":"true","attributes":{"chg_model":"e55d0bfec343101035ae3f52c1d3ae49"}}'
+          change-request: '{"setCloseCode":"true","attributes":{"assignment_group":"a715cd759f2002002920bde8132e7018"}}'
           interval: '100'
           timeout: '3600'
