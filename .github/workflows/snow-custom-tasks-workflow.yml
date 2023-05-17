@@ -243,7 +243,7 @@ jobs:
             - name: ServiceNow DevOps Change Automation
             # You may pin to the exact commit or the version.
             # uses: ServiceNow/servicenow-devops-change@0f57435999463cc1dea44bde4f5eca9879474b85
-              uses: ServiceNow/servicenow-devops-change@dev
+              uses: ServiceNow/servicenow-devops-change@v1.38.0
               with:
                   # ServiceNow Instance URL
                   instance-url: ${{ secrets.SN_INSTANCE_URL }}
