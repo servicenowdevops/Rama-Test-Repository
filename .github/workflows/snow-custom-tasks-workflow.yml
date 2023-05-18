@@ -271,7 +271,7 @@ jobs:
                           "backout_plan": "When software fails in production, the previous software release will be re-deployed.",
                           "test_plan": "Testing if the software was successfully deployed",
                           "chg_model": "62d10fa1c303101035ae3f52c1d3aec1",
-                          "service_offering": "4931efa04742e5101020ba85d36d4380"
+                          "service_offering": "f4644f31c3b2a91049c3d1ef0501310a"
                       }
                   }'
 
