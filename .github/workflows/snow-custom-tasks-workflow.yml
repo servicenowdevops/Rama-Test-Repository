@@ -270,7 +270,8 @@ jobs:
                           "implementation_plan": "Software update is tested and results can be found in Test Summaries Tab.",
                           "backout_plan": "When software fails in production, the previous software release will be re-deployed.",
                           "test_plan": "Testing if the software was successfully deployed",
-                          "chg_model": "62d10fa1c303101035ae3f52c1d3aec1",
+                          "chg_model": "e55d0bfec343101035ae3f52c1d3ae49",
+                          "standard_change_template": "508e02ec47410200e90d87e8dee49058",
                           "service_offering": "f4644f31c3b2a91049c3d1ef0501310a"
                       }
                   }'
