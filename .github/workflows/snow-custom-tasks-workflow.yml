@@ -265,7 +265,7 @@ jobs:
                   change-request: '{
                       "setCloseCode": "true",
                       "attributes": {
-                          "type":"emergency",
+                          "type":"normal",
                           "service_offering": "f4644f31c3b2a91049c3d1ef0501310a"
                       }
                   }'
