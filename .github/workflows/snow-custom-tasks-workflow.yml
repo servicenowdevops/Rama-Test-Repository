@@ -265,7 +265,7 @@ jobs:
                   change-request: '{
                       "setCloseCode": "true",
                       "attributes": {
-                          "type":"normal",
+                          "chg_model": "007c4001c343101035ae3f52c1d3aeb2",
                           "service_offering": "f4644f31c3b2a91049c3d1ef0501310a"
                       }
                   }'
