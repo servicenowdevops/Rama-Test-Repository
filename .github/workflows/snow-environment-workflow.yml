@@ -1,7 +1,7 @@
 # This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: GitHub Actions workflow with SNOW custom tasks
+name: GitHub Actions workflow with Environment change and SNOW custom tasks
 
 # on:
 #   push:
@@ -237,44 +237,12 @@ jobs:
     deploy:
         #if: github.event.pull_request.merged == true
         name: Deploy
+        environment: PROD
         needs: integrationTest
         runs-on: ubuntu-latest
-        steps:     
-            - name: ServiceNow DevOps Change Automation
-            # You may pin to the exact commit or the version.
-            # uses: ServiceNow/servicenow-devops-change@0f57435999463cc1dea44bde4f5eca9879474b85
-              uses: ServiceNow/servicenow-devops-change@dev
-              with:
-                  # ServiceNow Instance URL
-                  instance-url: ${{ secrets.SN_INSTANCE_URL }}
-                  # Devops Integration User Name
-                  devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
-                  # Devops Integration User Password
-                  devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
-                  # Orchestration Tool Id
-                  tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
-                  # Display Name of the Job
-                  job-name: 'Deploy'
-                  # Github Context
-                  context-github: ${{ toJSON(github) }}
-                  # The max. time in seconds to wait until the action should fail.
-                  timeout: 3600 # optional, default is 3600
-                  # The time in seconds to wait between trying the API.
-                  interval: 100 # optional, default is 100
-                  # The customized inputs to create change with the requested details.
-                  change-request: '{
-                      "setCloseCode": "true",
-                      "attributes": {
-                          "short_description": "Automated Software Deployment",
-                          "description": "Automated Software Deployment.",
-                          "implementation_plan": "Software update is tested and results can be found in Test Summaries Tab.",
-                          "backout_plan": "When software fails in production, the previous software release will be re-deployed.",
-                          "test_plan": "Testing if the software was successfully deployed"
-                      }
-                  }'
-
-#             - name: Run deployment scripts
-#               run: echo Completed Deployment
+        steps:
+            - name: Run deployment scripts
+              run: echo Completed running deployment script
 
     postdeploy:
         #if: github.event.pull_request.merged == true
