@@ -100,27 +100,27 @@ jobs:
                   SONAR_URL: ${{ secrets.SONAR_URL }}
                   SONAR_ORG_KEY: ${{ secrets.SONAR_ORG_KEY }}
 
-            - name: ServiceNow DevOps Sonar Scan Results
-            # You may pin to the exact commit or the version.
-            # uses: ServiceNow/servicenow-devops-sonar@0ed32c6471c8191f264d4bd464f14c858032354a
-              uses: ServiceNow/servicenow-devops-sonar@main
-              with:
-                  # ServiceNow Instance URL
-                  instance-url: ${{ secrets.SN_INSTANCE_URL }}
-                  # Devops Integration User Name
-                  devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
-                  # Devops Integration User Password
-                  devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
-                  # Orchestration Tool Id
-                  tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
-                  # Github Context
-                  context-github: ${{ toJSON(github) }}
-                  # Display Name of the Job
-                  job-name: 'Test'
-                  # Sonar Host URL
-                  sonar-host-url: ${{ secrets.SONAR_URL }}
-                  # Sonar Project Key
-                  sonar-project-key: ${{ secrets.SONAR_PROJECT_KEY }}
+#             - name: ServiceNow DevOps Sonar Scan Results
+#             # You may pin to the exact commit or the version.
+#             # uses: ServiceNow/servicenow-devops-sonar@0ed32c6471c8191f264d4bd464f14c858032354a
+#               uses: ServiceNow/servicenow-devops-sonar@main
+#               with:
+#                   # ServiceNow Instance URL
+#                   instance-url: ${{ secrets.SN_INSTANCE_URL }}
+#                   # Devops Integration User Name
+#                   devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
+#                   # Devops Integration User Password
+#                   devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
+#                   # Orchestration Tool Id
+#                   tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+#                   # Github Context
+#                   context-github: ${{ toJSON(github) }}
+#                   # Display Name of the Job
+#                   job-name: 'Test'
+#                   # Sonar Host URL
+#                   sonar-host-url: ${{ secrets.SONAR_URL }}
+#                   # Sonar Project Key
+#                   sonar-project-key: ${{ secrets.SONAR_PROJECT_KEY }}
                   
             #- name: Run JUnit Tests
             #  run: mvn test -Dmaven.test.failure.ignore=true surefire-report:report
