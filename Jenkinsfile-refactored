@@ -123,7 +123,7 @@ pipeline {
 					        "comments": "Change request comments UPDATED!!!"
 					        "work_notes": "Change request work_notes UPDATED!!!"
 					    }""",
-					    changeRequestNumber: """${changeRequestNumber}""")
+					    changeRequestNumber: """${changeRequestId}""")
 					echo "Verify the state, comments and work_notes are updated"
 			    }
 			 }
