@@ -120,7 +120,7 @@ pipeline {
 					    changeRequestDetails: """
 					    {
 					        "state":"3",
-					        "comments": "Change request comments UPDATED!!!"
+					        "comments": "Change request comments UPDATED!!!",
 					        "work_notes": "Change request work_notes UPDATED!!!"
 					    }""",
 					    changeRequestNumber: """${changeRequestId}""")
