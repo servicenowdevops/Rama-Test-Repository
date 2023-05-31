@@ -30,7 +30,7 @@ pipeline {
 				echo 'Running deploy stage'
 				// error 'Failing the Deploy stage'
 				snDevOpsChange()
-				sh 'exit 0'
+				sh 'exit 1'
 			}
 		}
 	}
