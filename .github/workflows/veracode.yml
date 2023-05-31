@@ -59,9 +59,28 @@ jobs:
       id: convert
       uses: veracode/veracode-pipeline-scan-results-to-sarif@ff08ae5b45d5384cb4679932f184c013d34da9be
       with:
-        pipeline-results-json: results.json
+          pipeline-results-json: results.json
+          output-results-sarif: veracode-results.sarif
+          source-base-path-1: "^com/veracode:src/main/java/com/veracode"
+          source-base-path-2: "^WEB-INF:src/main/webapp/WEB-INF"
+          finding-rule-level: "3:1:0"
     
     - uses: github/codeql-action/upload-sarif@v2
       with:
         # Path to SARIF file relative to the root of the repository
         sarif_file: veracode-results.sarif
+
+    - name: Veracode Upload And Scan
+      uses: veracode/veracode-uploadandscan-action@0.2.6
+      with:
+        appname: 'App-DevOps-Azure-POC'
+        createprofile: false
+        filepath: 'target/DevOps-Test-1.39.0-SNAPSHOT.jar'
+        vid: '${{ secrets.API_ID }}'
+        vkey: '${{ secrets.API_KEY }}'
+#          createsandbox: 'true'
+#          sandboxname: 'SANDBOXNAME'
+#          scantimeout: 0
+#          exclude: '*.js'
+#          include: '*.war'
+#          criticality: 'VeryHigh'
