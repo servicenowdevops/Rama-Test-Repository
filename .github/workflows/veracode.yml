@@ -42,7 +42,7 @@ jobs:
     - uses: actions/upload-artifact@v1
       with:
         name: my-artifact
-        path: DevOps-Test/target/DevOps-Test-1.39.0-SNAPSHOT.jar
+        path: target/DevOps-Test-1.39.0-SNAPSHOT.jar
 
     # download the Veracode Static Analysis Pipeline scan jar
     - run: curl --silent --show-error --fail -O https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
@@ -52,7 +52,7 @@ jobs:
       with:
         java-version: 8
         distribution: 'temurin'
-    - run: java -jar pipeline-scan.jar --veracode_api_id "${{secrets.VERACODE_API_ID}}" --veracode_api_key "${{secrets.VERACODE_API_KEY}}" --fail_on_severity="Very High, High" --file DevOps-Test/target/DevOps-Test-1.39.0-SNAPSHOT.jar
+    - run: java -jar pipeline-scan.jar --veracode_api_id "${{secrets.VERACODE_API_ID}}" --veracode_api_key "${{secrets.VERACODE_API_KEY}}" --fail_on_severity="Very High, High" --file target/DevOps-Test-1.39.0-SNAPSHOT.jar
       continue-on-error: true
     
     - name: Convert pipeline scan output to SARIF format
