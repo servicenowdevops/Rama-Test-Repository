@@ -267,6 +267,9 @@ jobs:
                   # The time in seconds to wait between trying the API.
                   interval: 100 # optional, default is 100
                   # The customized inputs to create change with the requested details.
+                  changeCreationTimeOut: 3600
+                  abortOnChangeCreationFailure: 'false'
+                  abortOnChangeStepTimeout: 'true'
                   change-request: '{
                       "setCloseCode": "true",
                       "attributes": {
