@@ -13,10 +13,6 @@ public class secondTest {
 
 	@Test
 	public void test2() {
-
-		for (int i = 0; i < 200; i++)
-			System.out.print("Test summary #" + i + "\n");
-
 		Assert.assertTrue(true, "test is passed");
 	}
 
