@@ -29,7 +29,12 @@ pipeline {
 			steps {
 				echo 'Running deploy stage'
 				// error 'Failing the Deploy stage'
-				snDevOpsChange()
+				exit 0
+			}
+			post {
+				always {
+					snDevOpsChange()
+				}
 			}
 		}
 	}
