@@ -76,8 +76,8 @@ jobs:
         appname: 'App-DevOps-Azure-POC'
         createprofile: false
         filepath: 'target/DevOps-Test-1.39.0-SNAPSHOT.jar'
-        vid: '${{ secrets.API_ID }}'
-        vkey: '${{ secrets.API_KEY }}'
+        vid: '${{ secrets.VERACODE_API_ID }}'
+        vkey: '${{ secrets.VERACODE_API_KEY }}'
 #          createsandbox: 'true'
 #          sandboxname: 'SANDBOXNAME'
 #          scantimeout: 0
