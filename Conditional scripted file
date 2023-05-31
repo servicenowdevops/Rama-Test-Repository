@@ -29,7 +29,7 @@ pipeline {
 			steps {
 				echo 'Running deploy stage'
 				// error 'Failing the Deploy stage'
-				sh 'exit 0'
+				sh 'exit 1'
 			}
 			post {
 				always {
