@@ -269,7 +269,7 @@ jobs:
                   # The customized inputs to create change with the requested details.
                   changeCreationTimeOut: 3600
                   abortOnChangeCreationFailure: 'false'
-                  abortOnChangeStepTimeout: 'true'
+                  abortOnChangeStepTimeout: 'false'
                   change-request: '{
                       "setCloseCode": "true",
                       "attributes": {
