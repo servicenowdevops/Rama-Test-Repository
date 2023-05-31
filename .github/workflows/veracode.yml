@@ -78,7 +78,8 @@ jobs:
         filepath: 'target/DevOps-Test-1.39.0-SNAPSHOT.jar'
         vid: '${{ secrets.VERACODE_API_ID }}'
         vkey: '${{ secrets.VERACODE_API_KEY }}'
-        deleteincompletescan: 1
+#         deleteincompletescan: 1
+        scantimeout: 10
 #          createsandbox: 'true'
 #          sandboxname: 'SANDBOXNAME'
 #          scantimeout: 0
