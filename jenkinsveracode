@@ -7,7 +7,7 @@ pipeline {
 		stage('Build') {
 			steps {
 				sh 'mvn -B package --file pom.xml'
-        veracode applicationName: "App-DevOps-Azure-POC", criticality: 'VeryHigh', debug: true, fileNamePattern: '', pHost: '', pPassword: '', pUser: '', replacementPattern: '', sandboxName: '', scanExcludesPattern: '', scanIncludesPattern: '', scanName: "${BUILD_TAG}", uploadExcludesPattern: '', uploadIncludesPattern: 'target/DevOps-Test-1.39.0-SNAPSHOT.jar', vid: "db96ced87baba3dec24bd6b943aecc89", vkey: "db478ef331cad5e63a5799da2e7d6d2093d232fe02882930c55bb7efdd2a36ae81430aa85a36c61c379e923316b875bdf83ab560192cd6adb8662cfff3208d1f"
+        veracode applicationName: "App-DevOps-Azure-POC", criticality: 'VeryHigh', debug: true, timeout: 20, fileNamePattern: '', pHost: '', pPassword: '', pUser: '', replacementPattern: '', sandboxName: '', scanExcludesPattern: '', scanIncludesPattern: '', scanName: "${BUILD_TAG}", uploadExcludesPattern: '', uploadIncludesPattern: 'target/DevOps-Test-1.39.0-SNAPSHOT.jar', vid: "db96ced87baba3dec24bd6b943aecc89", vkey: "db478ef331cad5e63a5799da2e7d6d2093d232fe02882930c55bb7efdd2a36ae81430aa85a36c61c379e923316b875bdf83ab560192cd6adb8662cfff3208d1f"
 			}
 		}
 	}
