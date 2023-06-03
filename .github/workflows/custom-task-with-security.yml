@@ -20,12 +20,6 @@ on: workflow_dispatch
 #      - closed
 
 jobs:
-    run-veracode-scan:
-        uses: pramaraju96/DevOps-Test/.github/workflows/veracode.yml@main
-        secrets: inherit
-#         secrets:
-#             VERACODE_API_ID: ${{ secrets.VERACODE_API_ID }}
-#             VERACODE_API_KEY: ${{ secrets.VERACODE_API_KEY }}
     build:
         # Running your workflow when a pull request merges
         # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#running-your-workflow-when-a-pull-request-merges-1
@@ -166,12 +160,19 @@ jobs:
                   # GitHub Custom Action
                   test-type: # optional, default is JUnit
 
-
+    run-veracode-scan:
+        name: Veracode Static Analysis Pipeline Scan
+        needs: test
+        uses: pramaraju96/DevOps-Test/.github/workflows/veracode.yml@main
+        secrets: inherit
+#         secrets:
+#             VERACODE_API_ID: ${{ secrets.VERACODE_API_ID }}
+#             VERACODE_API_KEY: ${{ secrets.VERACODE_API_KEY }}
 
     integrationTest:
         #if: github.event.pull_request.merged == true
         name: Integration Tests
-        needs: test
+        needs: run-veracode-scan
         runs-on: ubuntu-latest
         steps:
             - name: ServiceNow DevOps Register Artifact
