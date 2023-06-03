@@ -23,11 +23,11 @@ permissions:
 jobs:
   # This workflow contains a job to build and submit pipeline scan, you will need to customize the build process accordingly and make sure the artifact you build is used as the file input to the pipeline scan file parameter
   build-and-pipeline-scan:
-    # The type of runner that the job will run on
+#     # The type of runner that the job will run on
     permissions:
-      contents: read # for actions/checkout to fetch code
+#       contents: read # for actions/checkout to fetch code
       security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
-      actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
+#       actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
     
     runs-on: ubuntu-latest
     steps:
@@ -71,7 +71,7 @@ jobs:
     - uses: github/codeql-action/upload-sarif@v2
       with:
         # Path to SARIF file relative to the root of the repository
-        sarif_file: veracode-results.sarif
+        sarif_file: ./veracode-results.sarif
     
 
 #     - name: Veracode Upload And Scan
