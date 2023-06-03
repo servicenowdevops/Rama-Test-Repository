@@ -150,14 +150,12 @@ jobs:
     run-veracode-scan:
         name: Veracode Static Analysis Pipeline Scan
         needs: test
+        uses: pramaraju96/DevOps-Test/.github/workflows/veracode.yml@main
+        secrets: inherit
+#         secrets:
+#             VERACODE_API_ID: ${{ secrets.VERACODE_API_ID }}
+#             VERACODE_API_KEY: ${{ secrets.VERACODE_API_KEY }}
         steps:
-          - name: ServiceNow DevOps Register Artifact
-            uses: pramaraju96/DevOps-Test/.github/workflows/veracode.yml@main
-            secrets: inherit
-    #         secrets:
-    #             VERACODE_API_ID: ${{ secrets.VERACODE_API_ID }}
-    #             VERACODE_API_KEY: ${{ secrets.VERACODE_API_KEY }}
-
           - name: Servicenow Security Scan Results
             uses: maheshganji/custom-action-get@sonar
             with:
@@ -167,7 +165,7 @@ jobs:
             tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
             context-github: ${{ toJSON(github) }}
             job-name: 'run-veracode-scan'
-            security-result-attributes: '{ "scanner": "Veracode", "applicationName": "VeracodeAPP", "buildVersion": "V1","security-tool-id": "a670e317c383e110f920550f0501310b"}'
+            security-result-attributes: '{ "scanner": "Veracode", "applicationName": "App-DevOps-Azure-POC"}'
 
     integrationTest:
         #if: github.event.pull_request.merged == true
