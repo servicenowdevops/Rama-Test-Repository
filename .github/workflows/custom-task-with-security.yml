@@ -162,7 +162,7 @@ jobs:
                   test-type: # optional, default is JUnit
 
     run-veracode-scan:
-        uses: pramaraju96/DevOps-Test/.github/workflows/veracode.yaml@main
+        uses: ./.github/workflows/veracode.yaml
 #         secrets: inherit
         secrets:
             GHP_TOKEN: ${{ secrets.GHP_TOKEN }}
