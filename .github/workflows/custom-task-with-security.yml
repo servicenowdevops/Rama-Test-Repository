@@ -22,10 +22,10 @@ on: workflow_dispatch
 jobs:
     run-veracode-scan:
         uses: pramaraju96/DevOps-Test/.github/workflows/veracode.yml@main
-#         secrets: inherit
-        secrets:
-            VERACODE_API_ID: ${{ secrets.VERACODE_API_ID }}
-            VERACODE_API_KEY: ${{ secrets.VERACODE_API_KEY }}
+        secrets: inherit
+#         secrets:
+#             VERACODE_API_ID: ${{ secrets.VERACODE_API_ID }}
+#             VERACODE_API_KEY: ${{ secrets.VERACODE_API_KEY }}
     build:
         # Running your workflow when a pull request merges
         # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#running-your-workflow-when-a-pull-request-merges-1
