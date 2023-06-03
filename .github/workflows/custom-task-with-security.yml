@@ -20,7 +20,11 @@ on: workflow_dispatch
 #      - closed
 
 jobs:
-
+    run-veracode-scan:
+        uses: pramaraju96/DevOps-Test/.github/workflows/veracode.yml@main
+#         secrets: inherit
+        secrets:
+            GHP_TOKEN: ${{ secrets.GHP_TOKEN }}
     build:
         # Running your workflow when a pull request merges
         # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#running-your-workflow-when-a-pull-request-merges-1
@@ -161,11 +165,7 @@ jobs:
                   # GitHub Custom Action
                   test-type: # optional, default is JUnit
 
-    run-veracode-scan:
-        uses: ./.github/workflows/veracode.yaml
-#         secrets: inherit
-        secrets:
-            GHP_TOKEN: ${{ secrets.GHP_TOKEN }}
+
 
     integrationTest:
         #if: github.event.pull_request.merged == true
