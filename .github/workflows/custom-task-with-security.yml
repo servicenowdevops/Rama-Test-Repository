@@ -129,11 +129,9 @@ jobs:
                 instance-url: ${{ secrets.SN_INSTANCE_URL }}
                 tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
                 context-github: ${{ toJSON(github) }}
-                job-name: 'Test'
-                security-tool-id: '3f3382b4479a615060f22fe4126d431d'
-                security-result-attributes: '{ "applicationName": "VeracodeAPP", "buildVersion": "V1" }'
-            
-            
+                job-name: 'Servicenow Security Scan Results'
+                security-result-attributes: '{ "scanner": "Veracode", "applicationName": "VeracodeAPP", "buildVersion": "V1","security-tool-id": "a670e317c383e110f920550f0501310b"}'
+
             #- name: Run JUnit Tests
             #  run: mvn test -Dmaven.test.failure.ignore=true surefire-report:report
 
