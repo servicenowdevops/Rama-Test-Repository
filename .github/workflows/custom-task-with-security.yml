@@ -155,17 +155,6 @@ jobs:
 #         secrets:
 #             VERACODE_API_ID: ${{ secrets.VERACODE_API_ID }}
 #             VERACODE_API_KEY: ${{ secrets.VERACODE_API_KEY }}
-        steps:
-          - name: Servicenow Security Scan Results
-            uses: maheshganji/custom-action-get@sonar
-            with:
-            devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
-            devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
-            instance-url: ${{ secrets.SN_INSTANCE_URL }}
-            tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
-            context-github: ${{ toJSON(github) }}
-            job-name: 'run-veracode-scan'
-            security-result-attributes: '{ "scanner": "Veracode", "applicationName": "App-DevOps-Azure-POC"}'
 
     integrationTest:
         #if: github.event.pull_request.merged == true
@@ -173,6 +162,18 @@ jobs:
         needs: run-veracode-scan
         runs-on: ubuntu-latest
         steps:
+        
+            - name: Servicenow Security Scan Results
+              uses: maheshganji/custom-action-get@sonar
+              with:
+              devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
+              devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
+              instance-url: ${{ secrets.SN_INSTANCE_URL }}
+              tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+              context-github: ${{ toJSON(github) }}
+              job-name: 'run-veracode-scan'
+              security-result-attributes: '{ "scanner": "Veracode", "applicationName": "App-DevOps-Azure-POC"}'
+
             - name: ServiceNow DevOps Register Artifact
             # You may pin to the exact commit or the version.
             # uses: ServiceNow/servicenow-devops-register-artifact@6312802fd9eecd4a57b13216e968b8cae4ff6fe4
