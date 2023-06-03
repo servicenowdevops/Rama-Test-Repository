@@ -121,17 +121,6 @@ jobs:
                   # Sonar Project Key
                   sonar-project-key: ${{ secrets.SONAR_PROJECT_KEY }}
 
-            - name: Servicenow Security Scan Results
-              uses: maheshganji/custom-action-get@sonar
-              with:
-                devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
-                devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
-                instance-url: ${{ secrets.SN_INSTANCE_URL }}
-                tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
-                context-github: ${{ toJSON(github) }}
-                job-name: 'Servicenow Security Scan Results'
-                security-result-attributes: '{ "scanner": "Veracode", "applicationName": "VeracodeAPP", "buildVersion": "V1","security-tool-id": "a670e317c383e110f920550f0501310b"}'
-
             #- name: Run JUnit Tests
             #  run: mvn test -Dmaven.test.failure.ignore=true surefire-report:report
 
@@ -161,11 +150,24 @@ jobs:
     run-veracode-scan:
         name: Veracode Static Analysis Pipeline Scan
         needs: test
-        uses: pramaraju96/DevOps-Test/.github/workflows/veracode.yml@main
-        secrets: inherit
-#         secrets:
-#             VERACODE_API_ID: ${{ secrets.VERACODE_API_ID }}
-#             VERACODE_API_KEY: ${{ secrets.VERACODE_API_KEY }}
+        steps:
+          - name: ServiceNow DevOps Register Artifact
+            uses: pramaraju96/DevOps-Test/.github/workflows/veracode.yml@main
+            secrets: inherit
+    #         secrets:
+    #             VERACODE_API_ID: ${{ secrets.VERACODE_API_ID }}
+    #             VERACODE_API_KEY: ${{ secrets.VERACODE_API_KEY }}
+
+          - name: Servicenow Security Scan Results
+            uses: maheshganji/custom-action-get@sonar
+            with:
+            devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
+            devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
+            instance-url: ${{ secrets.SN_INSTANCE_URL }}
+            tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+            context-github: ${{ toJSON(github) }}
+            job-name: 'run-veracode-scan'
+            security-result-attributes: '{ "scanner": "Veracode", "applicationName": "VeracodeAPP", "buildVersion": "V1","security-tool-id": "a670e317c383e110f920550f0501310b"}'
 
     integrationTest:
         #if: github.event.pull_request.merged == true
