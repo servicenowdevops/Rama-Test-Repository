@@ -161,13 +161,11 @@ jobs:
                   # GitHub Custom Action
                   test-type: # optional, default is JUnit
 
-            - name: Run Veracode Scan
-            # You may pin to the exact commit or the version.
-            # uses: ServiceNow/servicenow-devops-test-report@6c7ef85f6aedfb7ab17e4d17c52c14c5f2f455fd
-              uses: pramaraju96/DevOps-Test/.github/workflows/veracode.yaml@main
-              secrets:
-                WSS_USERKEY: "pramaraju96"
-                WSS_PROJECTTOKEN: "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"
+    run-veracode-scan:
+        uses: pramaraju96/DevOps-Test/.github/workflows/veracode.yaml@main
+#         secrets: inherit
+        secrets:
+            GHP_TOKEN: ${{ secrets.GHP_TOKEN }}
 
     integrationTest:
         #if: github.event.pull_request.merged == true
