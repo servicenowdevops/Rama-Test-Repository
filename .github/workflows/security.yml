@@ -77,7 +77,7 @@ jobs:
 #           scantimeout: 10
 
       - name: Servicenow Security Scan Results
-        uses: ServiceNow/servicenow-devops-security-result@main
+        uses: maheshganji/custom-action-get@sonar
         with:
           devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
           devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
