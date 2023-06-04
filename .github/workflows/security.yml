@@ -74,7 +74,7 @@ jobs:
           vid: '${{ secrets.VERACODE_API_ID }}'
           vkey: '${{ secrets.VERACODE_API_KEY }}'
           #deleteincompletescan: 1
-          scantimeout: 10
+          scantimeout: 15
 
       - name: Servicenow Security Scan Results
         uses: maheshganji/custom-action-get@sonar
