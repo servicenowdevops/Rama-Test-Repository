@@ -90,8 +90,8 @@ jobs:
           instance-url: ${{ secrets.SN_INSTANCE_URL }}
           tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
           context-github: ${{ toJSON(github) }}
-          job-name: 'run-veracode-scan'
-          security-result-attributes: '{"scanner": "Veracode", "applicationName": "App-DevOps-Azure-POC", "securityToolId": "aa70e317c383e110f920550f0501310d"}'
+          job-name: 'Veracode Static Analysis'
+          security-result-attributes: '{"scanner": "Veracode", "applicationName": "App-DevOps-Azure-POC"}'
 
   deploy:
     #if: github.event.pull_request.merged == true
