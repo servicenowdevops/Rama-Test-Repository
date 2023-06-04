@@ -65,25 +65,19 @@ jobs:
           # Path to SARIF file relative to the root of the repository
           sarif_file: veracode-results.sarif
 
-      - name: Veracode Upload And Scan
-        uses: veracode/veracode-uploadandscan-action@0.2.6
-        with:
-          appname: 'App-DevOps-Azure-POC'
-          createprofile: false
-          filepath: 'target/DevOps-Test-1.39.0-SNAPSHOT.jar'
-          vid: '${{ secrets.VERACODE_API_ID }}'
-          vkey: '${{ secrets.VERACODE_API_KEY }}'
-          #deleteincompletescan: 1
-          scantimeout: 10
-          createsandbox: 'true'
-          #sandboxname: 'SANDBOXNAME'
-          #scantimeout: 0
-          #exclude: '*.js'
-          #include: '*.war'
-          #criticality: 'VeryHigh'
+#       - name: Veracode Upload And Scan
+#         uses: veracode/veracode-uploadandscan-action@0.2.6
+#         with:
+#           appname: 'App-DevOps-Azure-POC'
+#           createprofile: false
+#           filepath: 'target/DevOps-Test-1.39.0-SNAPSHOT.jar'
+#           vid: '${{ secrets.VERACODE_API_ID }}'
+#           vkey: '${{ secrets.VERACODE_API_KEY }}'
+#           #deleteincompletescan: 1
+#           scantimeout: 10
 
       - name: Servicenow Security Scan Results
-        uses: maheshganji/custom-action-get@sonar
+        uses: ServiceNow/servicenow-devops-security-result@main
         with:
           devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
           devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
