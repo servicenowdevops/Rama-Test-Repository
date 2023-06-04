@@ -1,0 +1,103 @@
+name: Get Security Summary Results
+
+on: workflow_dispatch
+
+jobs:
+  build:
+    # Running your workflow when a pull request merges
+    # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#running-your-workflow-when-a-pull-request-merges-1
+    #if: github.event.pull_request.merged == true
+    name: Build
+    runs-on: ubuntu-latest
+    steps:           
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+
+  # This workflow contains a job to build and submit pipeline scan, you will need to customize the build process accordingly and make sure the artifact you build is used as the file input to the pipeline scan file parameter
+  scan:
+    name: Veracode Static Analysis
+    needs: build
+    # The type of runner that the job will run on
+    permissions:
+      contents: read # for actions/checkout to fetch code
+      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
+      actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
+    runs-on: ubuntu-latest
+    steps:
+
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it and copies all sources into ZIP file for submitting for analysis. Replace this section with your applications build steps
+      - uses: actions/checkout@v3
+        with:
+          repository: ''
+
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: my-artifact
+          path: target/DevOps-Test-1.39.0-SNAPSHOT.jar          
+
+      # download the Veracode Static Analysis Pipeline scan jar
+      - run: curl --silent --show-error --fail -O https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
+      - run: unzip -o pipeline-scan-LATEST.zip
+
+      - uses: actions/setup-java@v3
+        with:
+          java-version: 8
+          distribution: 'temurin'
+        - run: java -jar pipeline-scan.jar --veracode_api_id "${{secrets.VERACODE_API_ID}}" --veracode_api_key "${{secrets.VERACODE_API_KEY}}" --fail_on_severity="Very High, High" --file target/DevOps-Test-1.39.0-SNAPSHOT.jar
+          continue-on-error: true
+        
+        - name: Convert pipeline scan output to SARIF format
+          id: convert
+          uses: veracode/veracode-pipeline-scan-results-to-sarif@ff08ae5b45d5384cb4679932f184c013d34da9be
+          with:
+            pipeline-results-json: results.json
+            output-results-sarif: veracode-results.sarif
+            source-base-path-1: "^com/veracode:src/main/java/com/veracode"
+            source-base-path-2: "^WEB-INF:src/main/webapp/WEB-INF"
+            finding-rule-level: "3:1:0"
+
+        - uses: github/codeql-action/upload-sarif@v2
+          with:
+            # Path to SARIF file relative to the root of the repository
+            sarif_file: veracode-results.sarif
+
+        - name: Veracode Upload And Scan
+          uses: veracode/veracode-uploadandscan-action@0.2.6
+          with:
+            appname: 'App-DevOps-Azure-POC'
+            createprofile: false
+            filepath: 'target/DevOps-Test-1.39.0-SNAPSHOT.jar'
+            vid: '${{ secrets.VERACODE_API_ID }}'
+            vkey: '${{ secrets.VERACODE_API_KEY }}'
+            #deleteincompletescan: 1
+            scantimeout: 10
+            createsandbox: 'true'
+            #sandboxname: 'SANDBOXNAME'
+            #scantimeout: 0
+            #exclude: '*.js'
+            #include: '*.war'
+            #criticality: 'VeryHigh'
+
+        - name: Servicenow Security Scan Results
+          uses: maheshganji/custom-action-get@sonar
+          with:
+            devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
+            devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
+            instance-url: ${{ secrets.SN_INSTANCE_URL }}
+            tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+            context-github: ${{ toJSON(github) }}
+            job-name: 'run-veracode-scan'
+            security-result-attributes: '{"scanner": "Veracode", "applicationName": "VeracodeAPP", "buildVersion": "V1", "securityToolId": "a670e317c383e110f920550f0501310b"}'
+
+  deploy:
+    #if: github.event.pull_request.merged == true
+    name: Deploy
+    needs: scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run deployment scripts
+        run: echo Completed Deployment
