@@ -26,7 +26,7 @@ pipeline {
 			steps {
 				echo "Using ServiceNow Security Results step to retrieve and store the security scan results"
 				snDevOpsSecurityResult({
-				    "securityResultAttributes": '{"scanner": "${env.SCANNER}", "applicationName": "${env.VERACODE_APPLICATION_NAME}"}'
+				    "securityResultAttributes": "{'scanner': 'Veracode', 'applicationName': 'App-DevOps-Azure-POC'}"
 				})
 			}
 		}
