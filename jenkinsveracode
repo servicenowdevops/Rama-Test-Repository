@@ -7,7 +7,7 @@ pipeline {
 
 	environment {
 		SCANNER = "Veracode"
-		VERACODE_APPLICATION_NAME = 'App-DevOps-Azure-POC'
+		VERACODE_APPLICATION_NAME = 'GitHub Vera POC'
 		VERACODE_API_ID = credentials('VERACODE_API_ID')
 		VERACODE_API_KEY = credentials('VERACODE_API_KEY')
 	}
