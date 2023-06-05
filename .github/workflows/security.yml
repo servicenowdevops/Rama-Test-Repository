@@ -68,7 +68,7 @@ jobs:
       - name: Veracode Upload And Scan
         uses: veracode/veracode-uploadandscan-action@0.2.6
         with:
-          appname: 'GitHub Vera POC'
+          appname: 'PetStoreAPI-Github'
           createprofile: false
           filepath: 'target/DevOps-Test-1.39.0-SNAPSHOT.jar'
           vid: '${{ secrets.VERACODE_API_ID }}'
