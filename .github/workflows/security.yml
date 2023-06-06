@@ -68,7 +68,7 @@ jobs:
       - name: Veracode Upload And Scan
         uses: veracode/veracode-uploadandscan-action@0.2.6
         with:
-          appname: 'PetStoreAPI-Github'
+          appname: 'App-DevOps-Azure-POC'
           createprofile: false
           filepath: 'target/DevOps-Test-1.39.0-SNAPSHOT.jar'
 #           version: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
@@ -86,7 +86,7 @@ jobs:
           tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
           context-github: ${{ toJSON(github) }}
           job-name: 'Veracode Static Analysis'
-          security-result-attributes: '{ "scanner": "Veracode", "applicationName": "PetStoreAPI-Github" }'
+          security-result-attributes: '{ "scanner": "Veracode", "applicationName": "App-DevOps-Azure-POC", "securityToolId": "185f9545c3932d1073fb212ad0013111" }'
 
   deploy:
     #if: github.event.pull_request.merged == true
