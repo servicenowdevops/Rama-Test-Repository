@@ -34,47 +34,47 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
-      - uses: actions/upload-artifact@v1
-        with:
-          name: my-artifact
-          path: target/DevOps-Test-1.39.0-SNAPSHOT.jar          
-
-      # download the Veracode Static Analysis Pipeline scan jar
-      - run: curl --silent --show-error --fail -O https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
-      - run: unzip -o pipeline-scan-LATEST.zip
-
-      - uses: actions/setup-java@v3
-        with:
-          java-version: 8
-          distribution: 'temurin'
-      - run: java -jar pipeline-scan.jar --veracode_api_id "${{secrets.VERACODE_API_ID}}" --veracode_api_key "${{secrets.VERACODE_API_KEY}}" --fail_on_severity="Very High, High" --file target/DevOps-Test-1.39.0-SNAPSHOT.jar
-        continue-on-error: true
-        
-      - name: Convert pipeline scan output to SARIF format
-        id: convert
-        uses: veracode/veracode-pipeline-scan-results-to-sarif@ff08ae5b45d5384cb4679932f184c013d34da9be
-        with:
-          pipeline-results-json: results.json
-          output-results-sarif: veracode-results.sarif
-          source-base-path-1: "^com/veracode:src/main/java/com/veracode"
-          source-base-path-2: "^WEB-INF:src/main/webapp/WEB-INF"
-          finding-rule-level: "3:1:0"
-
-      - uses: github/codeql-action/upload-sarif@v2
-        with:
-          # Path to SARIF file relative to the root of the repository
-          sarif_file: veracode-results.sarif
-
-#       - name: Veracode Upload And Scan
-#         uses: veracode/veracode-uploadandscan-action@0.2.6
+#       - uses: actions/upload-artifact@v1
 #         with:
-#           appname: 'PetStoreAPI-Github'
-#           createprofile: false
-#           filepath: 'target/DevOps-Test-1.39.0-SNAPSHOT.jar'
-#           vid: '${{ secrets.VERACODE_API_ID }}'
-#           vkey: '${{ secrets.VERACODE_API_KEY }}'
-#           #deleteincompletescan: 1
-#           scantimeout: 15
+#           name: my-artifact
+#           path: target/DevOps-Test-1.39.0-SNAPSHOT.jar          
+
+#       # download the Veracode Static Analysis Pipeline scan jar
+#       - run: curl --silent --show-error --fail -O https://downloads.veracode.com/securityscan/pipeline-scan-LATEST.zip
+#       - run: unzip -o pipeline-scan-LATEST.zip
+
+#       - uses: actions/setup-java@v3
+#         with:
+#           java-version: 8
+#           distribution: 'temurin'
+#       - run: java -jar pipeline-scan.jar --veracode_api_id "${{secrets.VERACODE_API_ID}}" --veracode_api_key "${{secrets.VERACODE_API_KEY}}" --fail_on_severity="Very High, High" --file target/DevOps-Test-1.39.0-SNAPSHOT.jar
+#         continue-on-error: true
+        
+#       - name: Convert pipeline scan output to SARIF format
+#         id: convert
+#         uses: veracode/veracode-pipeline-scan-results-to-sarif@ff08ae5b45d5384cb4679932f184c013d34da9be
+#         with:
+#           pipeline-results-json: results.json
+#           output-results-sarif: veracode-results.sarif
+#           source-base-path-1: "^com/veracode:src/main/java/com/veracode"
+#           source-base-path-2: "^WEB-INF:src/main/webapp/WEB-INF"
+#           finding-rule-level: "3:1:0"
+
+#       - uses: github/codeql-action/upload-sarif@v2
+#         with:
+#           # Path to SARIF file relative to the root of the repository
+#           sarif_file: veracode-results.sarif
+
+      - name: Veracode Upload And Scan
+        uses: veracode/veracode-uploadandscan-action@0.2.6
+        with:
+          appname: 'PetStoreAPI-Github'
+          createprofile: false
+          filepath: 'target/DevOps-Test-1.39.0-SNAPSHOT.jar'
+          vid: '${{ secrets.VERACODE_API_ID }}'
+          vkey: '${{ secrets.VERACODE_API_KEY }}'
+          #deleteincompletescan: 1
+          scantimeout: 15
 
       - name: ServiceNow DevOps Security Results
         uses: maheshganji/custom-action-get@sonar
