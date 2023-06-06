@@ -71,6 +71,7 @@ jobs:
           appname: 'PetStoreAPI-Github'
           createprofile: false
           filepath: 'target/DevOps-Test-1.39.0-SNAPSHOT.jar'
+#           version: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
           vid: '${{ secrets.VERACODE_API_ID }}'
           vkey: '${{ secrets.VERACODE_API_KEY }}'
           #deleteincompletescan: 1
@@ -85,7 +86,7 @@ jobs:
           tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
           context-github: ${{ toJSON(github) }}
           job-name: 'Veracode Static Analysis'
-          security-result-attributes: '{ "scanner": "Veracode", "applicationName": "PetStoreAPI-Github" }'
+          security-result-attributes: '{ "scanner": "Veracode", "applicationName": "PetStoreAPI-Github", securityToolId: "a670e317c383e110f920550f0501310b" }'
 
   deploy:
     #if: github.event.pull_request.merged == true
