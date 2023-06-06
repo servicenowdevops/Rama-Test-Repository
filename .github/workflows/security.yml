@@ -65,17 +65,17 @@ jobs:
 #           # Path to SARIF file relative to the root of the repository
 #           sarif_file: veracode-results.sarif
 
-#       - name: Veracode Upload And Scan
-#         uses: veracode/veracode-uploadandscan-action@0.2.6
-#         with:
-#           appname: 'PetStoreAPI-Github'
-#           createprofile: false
-#           filepath: 'target/DevOps-Test-1.39.0-SNAPSHOT.jar'
-# #           version: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
-#           vid: '${{ secrets.VERACODE_API_ID }}'
-#           vkey: '${{ secrets.VERACODE_API_KEY }}'
-#           #deleteincompletescan: 1
-#           scantimeout: 15
+      - name: Veracode Upload And Scan
+        uses: veracode/veracode-uploadandscan-action@0.2.6
+        with:
+          appname: 'PetStoreAPI-Github'
+          createprofile: false
+          filepath: 'target/DevOps-Test-1.39.0-SNAPSHOT.jar'
+#           version: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
+          vid: '${{ secrets.VERACODE_API_ID }}'
+          vkey: '${{ secrets.VERACODE_API_KEY }}'
+          #deleteincompletescan: 1
+          scantimeout: 15
 
       - name: ServiceNow DevOps Security Results
         uses: maheshganji/custom-action-get@sonar
