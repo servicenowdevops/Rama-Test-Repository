@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Checkout code
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it and copies all sources into ZIP file for submitting for analysis.
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
 
       - name: Build with Maven
         run: mvn -B package --file pom.xml
