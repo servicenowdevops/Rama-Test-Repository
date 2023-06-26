@@ -103,8 +103,8 @@ jobs:
             - name: ServiceNow DevOps Sonar Scan Results
             # You may pin to the exact commit or the version.
             # uses: ServiceNow/servicenow-devops-sonar@0ed32c6471c8191f264d4bd464f14c858032354a
-            # uses: ServiceNow/servicenow-devops-sonar@v1.34.2            
-              uses: ServiceNow/servicenow-devops-sonar@main
+              uses: ServiceNow/servicenow-devops-sonar@v1.34.2            
+            # uses: ServiceNow/servicenow-devops-sonar@main
               with:
                   # ServiceNow Instance URL
                   instance-url: ${{ secrets.SN_INSTANCE_URL }}
@@ -129,8 +129,8 @@ jobs:
             - name: ServiceNow DevOps Unit Test Results
             # You may pin to the exact commit or the version.
             # uses: ServiceNow/servicenow-devops-test-report@6c7ef85f6aedfb7ab17e4d17c52c14c5f2f455fd
-            # uses: ServiceNow/servicenow-devops-test-report@v1.34.2            
-              uses: ServiceNow/servicenow-devops-test-report@main
+              uses: ServiceNow/servicenow-devops-test-report@v1.34.2            
+            # uses: ServiceNow/servicenow-devops-test-report@main
               with:
                   # Devops Integration User Name
                   devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
@@ -149,6 +149,29 @@ jobs:
                                                                                   # if both JUnit & TestNG tests, use target/surefire-reports/testng-junit-results/testng-results.xml
                   # GitHub Custom Action
                   test-type: # optional, default is JUnit
+                  
+            - name: Veracode Upload And Scan
+              uses: veracode/veracode-uploadandscan-action@0.2.6
+              with:
+                  appname: 'ServiceNow DevOps App#1'
+                  createprofile: false
+                  filepath: 'target/DevOps-Test-1.39.0-SNAPSHOT.jar'
+        #           version: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
+                  vid: '${{ secrets.VERACODE_API_ID }}'
+                  vkey: '${{ secrets.VERACODE_API_KEY }}'
+                  #deleteincompletescan: 1
+                  scantimeout: 20
+
+            - name: ServiceNow DevOps Security Results
+              uses: maheshganji/custom-action-get@sonar
+              with:
+                  devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
+                  devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
+                  instance-url: ${{ secrets.SN_INSTANCE_URL }}
+                  tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+                  context-github: ${{ toJSON(github) }}
+                  job-name: 'Veracode Static Analysis'
+                  security-result-attributes: '{ "scanner": "Veracode", "applicationName": "ServiceNow DevOps App#1" }'                  
 
     integrationTest:
         #if: github.event.pull_request.merged == true
@@ -278,7 +301,8 @@ jobs:
                           "assignment_group": "a715cd759f2002002920bde8132e7018",
                           "implementation_plan": "Software update is tested and results can be found in Test Summaries Tab.",
                           "backout_plan": "When software fails in production, the previous software release will be re-deployed.",
-                          "test_plan": "Testing if the software was successfully deployed"
+                          "test_plan": "Testing if the software was successfully deployed",
+                          "chg_model": "adffaa9e4370211072b7f6be5bb8f2ed"
                       }
                   }'
 
