@@ -150,17 +150,17 @@ jobs:
                   # GitHub Custom Action
                   test-type: # optional, default is JUnit
                   
-            - name: Veracode Upload And Scan
-              uses: veracode/veracode-uploadandscan-action@0.2.6
-              with:
-                  appname: 'ServiceNow DevOps App#1'
-                  createprofile: false
-                  filepath: 'target/DevOps-Test-1.39.0-SNAPSHOT.jar'
-        #           version: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
-                  vid: '${{ secrets.VERACODE_API_ID }}'
-                  vkey: '${{ secrets.VERACODE_API_KEY }}'
-                  #deleteincompletescan: 1
-                  scantimeout: 20
+#             - name: Veracode Upload And Scan
+#               uses: veracode/veracode-uploadandscan-action@0.2.6
+#               with:
+#                   appname: 'ServiceNow DevOps App#1'
+#                   createprofile: false
+#                   filepath: 'target/DevOps-Test-1.39.0-SNAPSHOT.jar'
+#         #           version: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
+#                   vid: '${{ secrets.VERACODE_API_ID }}'
+#                   vkey: '${{ secrets.VERACODE_API_KEY }}'
+#                   #deleteincompletescan: 1
+#                   scantimeout: 20
 
             - name: ServiceNow DevOps Security Results
               uses: maheshganji/custom-action-get@sonar
@@ -172,7 +172,7 @@ jobs:
                   tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
                   context-github: ${{ toJSON(github) }}
                   job-name: 'Veracode Static Analysis'
-                  security-result-attributes: '{ "scanner": "Veracode", "applicationName": "ServiceNow DevOps App#1" }'                  
+                  security-result-attributes: '{ "scanner": "Veracode", "applicationName": "PetStoreAPI-Github", "securityToolId": "d666da9a87f321106b8f8739dabb3508" }'                  
 
     integrationTest:
         #if: github.event.pull_request.merged == true
@@ -272,7 +272,7 @@ jobs:
             # You may pin to the exact commit or the version.
             # uses: ServiceNow/servicenow-devops-change@0f57435999463cc1dea44bde4f5eca9879474b85
             # uses: ServiceNow/servicenow-devops-change@main            
-              uses: ServiceNow/servicenow-devops-change@DEF0413612
+              uses: ServiceNow/servicenow-devops-change@dev2
               with:
                   # ServiceNow Instance URL
                   instance-url: ${{ secrets.SN_INSTANCE_URL }}
