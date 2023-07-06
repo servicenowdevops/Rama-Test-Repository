@@ -86,7 +86,7 @@ jobs:
           tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
           context-github: ${{ toJSON(github) }}
           job-name: 'Veracode Static Analysis'
-          security-result-attributes: '{ "scanner": "Veracode", "applicationName": "ServiceNow DevOps App#1" }'
+          security-result-attributes: '{ "scanner": "Veracode", "applicationName": "ServiceNow DevOps App#1", "securityToolId": "d666da9a87f321106b8f8739dabb3508" }'
 
   deploy:
     #if: github.event.pull_request.merged == true
