@@ -1,4 +1,4 @@
-name: Get Security Summary Results
+name: Divya change workflow with security and change steps
 
 on: workflow_dispatch
 
