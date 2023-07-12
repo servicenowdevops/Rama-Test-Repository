@@ -172,7 +172,7 @@ jobs:
                   tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
                   context-github: ${{ toJSON(github) }}
                   job-name: 'Test'
-                  security-result-attributes: '{ "scanner": "Veracode", "applicationName": "ServiceNow DevOps App#1", "securityToolId": "2753dacc83c03110f36cdf647daad3ba" }'                  
+                  security-result-attributes: '{ "scanner": "Veracode", "applicationName": "ServiceNow DevOps App#1", "securityToolId": "00b83ba7c3b72110c825371f050131ca" }'                  
 
     integrationTest:
         #if: github.event.pull_request.merged == true
