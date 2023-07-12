@@ -150,17 +150,17 @@ jobs:
                   # GitHub Custom Action
                   test-type: # optional, default is JUnit
                   
-            - name: Veracode Upload And Scan
-              uses: veracode/veracode-uploadandscan-action@0.2.6
-              with:
-                  appname: 'ServiceNow DevOps App#1'
-                  createprofile: false
-                  filepath: 'target/DevOps-Test-1.39.0-SNAPSHOT.jar'
-        #           version: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
-                  vid: '${{ secrets.VERACODE_API_ID }}'
-                  vkey: '${{ secrets.VERACODE_API_KEY }}'
-                  #deleteincompletescan: 1
-                  scantimeout: 20
+#             - name: Veracode Upload And Scan
+#               uses: veracode/veracode-uploadandscan-action@0.2.6
+#               with:
+#                   appname: 'ServiceNow DevOps App#1'
+#                   createprofile: false
+#                   filepath: 'target/DevOps-Test-1.39.0-SNAPSHOT.jar'
+#         #           version: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
+#                   vid: '${{ secrets.VERACODE_API_ID }}'
+#                   vkey: '${{ secrets.VERACODE_API_KEY }}'
+#                   #deleteincompletescan: 1
+#                   scantimeout: 20
 
             - name: ServiceNow DevOps Security Results
               uses: maheshganji/custom-action-get@sonar
@@ -172,7 +172,7 @@ jobs:
                   tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
                   context-github: ${{ toJSON(github) }}
                   job-name: 'Test'
-                  security-result-attributes: '{ "scanner": "Veracode", "applicationName": "ServiceNow DevOps App#1", "securityToolId": "17241cffc33b2110c825371f050131f6" }'                  
+                  security-result-attributes: '{ "scanner": "Veracode", "applicationName": "ServiceNow DevOps App#1", "securityToolId": "2753dacc83c03110f36cdf647daad3ba" }'                  
 
     integrationTest:
         #if: github.event.pull_request.merged == true
