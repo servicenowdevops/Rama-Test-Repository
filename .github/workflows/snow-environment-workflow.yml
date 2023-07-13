@@ -148,6 +148,30 @@ jobs:
                   # GitHub Custom Action
                   test-type: # optional, default is JUnit
 
+#             - name: Veracode Upload And Scan
+#               uses: veracode/veracode-uploadandscan-action@0.2.6
+#               with:
+#                   appname: 'ServiceNow DevOps App#1'
+#                   createprofile: false
+#                   filepath: 'target/DevOps-Test-1.39.0-SNAPSHOT.jar'
+#         #           version: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
+#                   vid: '${{ secrets.VERACODE_API_ID }}'
+#                   vkey: '${{ secrets.VERACODE_API_KEY }}'
+#                   #deleteincompletescan: 1
+#                   scantimeout: 20
+
+            - name: ServiceNow DevOps Security Results
+              uses: maheshganji/custom-action-get@sonar
+              with:
+                  devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
+                  devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
+                  devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
+                  instance-url: ${{ secrets.SN_INSTANCE_URL }}
+                  tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+                  context-github: ${{ toJSON(github) }}
+                  job-name: 'Test'
+                  security-result-attributes: '{ "scanner": "Veracode", "applicationName": "ServiceNow DevOps App#1", "securityToolId": "00b83ba7c3b72110c825371f050131ca" }'                  
+
     integrationTest:
         #if: github.event.pull_request.merged == true
         name: Integration Tests
