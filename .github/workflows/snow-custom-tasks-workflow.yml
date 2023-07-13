@@ -172,7 +172,7 @@ jobs:
                   tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
                   context-github: ${{ toJSON(github) }}
                   job-name: 'Test'
-                  security-result-attributes: '{ "scanner": ${{ secrets.SCANNER_NAME }}, "applicationName": ${{ secrets.VULNERABILITY_APPLICATION_NAME }} }'                  
+                  security-result-attributes: '{ "scanner": "${{ secrets.SCANNER_NAME }}", "applicationName": "${{ secrets.VULNERABILITY_APPLICATION_NAME }}" }'                  
 
     integrationTest:
         #if: github.event.pull_request.merged == true
