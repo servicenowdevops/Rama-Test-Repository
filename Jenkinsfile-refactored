@@ -138,7 +138,12 @@ pipeline {
 
 def sonarSummaries() {
 	withSonarQubeEnv(installationName: 'sonarqube1.sndevops.xyz'){
-              sh './mvn clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
+              //sh './mvn clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
+			sh 'mvn clean verify sonar:sonar \
+			    -Dsonar.login=623a5b264ce3e56cd686b493e1229b9498d592f9 \
+			    -Dsonar.host.url=http://sonarqube1.sndevops.xyz \
+			    -Dsonar.organization=pramaraju96 \
+			    -Dsonar.projectKey=pramaraju96_DevOps-Test'
         }
 	//withSonarQubeEnv('sonarqube1.sndevops.xyz'){
 		//if(fileExists("sonar-project.properties")) {
