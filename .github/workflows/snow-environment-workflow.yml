@@ -261,7 +261,8 @@ jobs:
     deploy:
         #if: github.event.pull_request.merged == true
         name: Deploy
-        environment: PROD
+        with:
+            environment: PROD
         needs: integrationTest
         runs-on: ubuntu-latest
         steps:
