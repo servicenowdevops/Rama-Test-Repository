@@ -35,8 +35,11 @@ pipeline {
        
        stage('Pre-Prod') {
 		steps {
-		    sleep(5);
-                    //sonarSummaries()
+		    sleep(3);
+                    sonarSummaries()
+		    sleep(3)
+		    snDevOpsSecurityResult securityResultAttributes: "{'scanner': 'Veracode', 'applicationName': '10kflaws-77'}"
+		    sleep(2)
                     snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"main"}""")
                     snDevOpsPackage(name: "${packageName}", artifactsPayload: """{"artifacts":[{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}], "branchName":"main"}""")
             }       
@@ -46,31 +49,24 @@ pipeline {
 		    
                     echo 'Deploying the change....'
                     snDevOpsChange(changeRequestDetails:"""
-		    {
-    "attributes":
-    {
-        "short_description": "Test description",
-        "priority": "1",
-        "start_date": "2021-02-05 08:00:00",
-        "end_date": "2022-04-05 08:00:00",
-        "justification": "test justification",
-        "description": "test description",
-        "cab_required": true,
-        "comments": "This update for work notes is from jenkins file",
-        "work_notes": "test work notes",
-        "chg_model":"007c4001c343101035ae3f52c1d3aeb2"
-    },
-    "setCloseCode": true
-}
-		    
+			{
+			    "attributes":
+			    {
+			        "short_description": "Test description",
+			        "priority": "1",
+			        "start_date": "2021-02-05 08:00:00",
+			        "end_date": "2022-04-05 08:00:00",
+			        "justification": "test justification",
+			        "description": "test description",
+			        "cab_required": true,
+			        "comments": "This update for work notes is from jenkins file",
+			        "work_notes": "test work notes",
+			        "chg_model":"007c4001c343101035ae3f52c1d3aeb2"
+			    },
+			    "setCloseCode": true
+			}
 		    """)
-		    //snDevOpsChange(ignoreErrors:false)
-		    script {
-		    	echo 'Inside script step...'
-		    	changeRequestId = snDevOpsGetChangeNumber()
-			//changeRequestId = snDevOpsGetChangeNumber(changeDetails: """{"build_number":"${env.BUILD_NUMBER}","pipeline_name":pipelineName,"stage_name":"${stageName}"}""")
-			echo "Change Request Id without any attributes... ${changeRequestId}"
-		    }
+
 		    
                  }
       }
