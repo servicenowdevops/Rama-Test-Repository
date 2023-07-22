@@ -38,7 +38,7 @@ pipeline {
 		    sleep(3);
                     sonarSummaries()
 		    sleep(3)
-		    snDevOpsSecurityResult securityResultAttributes: "{'scanner': 'Veracode', 'applicationName': '10kflaws-77'}"
+		    snDevOpsSecurityResult securityResultAttributes: "{'scanner': 'Veracode', 'applicationName': 'PetStoreAPI-Github'}"
 		    sleep(2)
                     snDevOpsArtifact(artifactsPayload: """{"artifacts": [{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}],"branchName":"main"}""")
                     snDevOpsPackage(name: "${packageName}", artifactsPayload: """{"artifacts":[{"name": "${artifactname}", "version": "1.${env.BUILD_NUMBER}","semanticVersion": "1.${env.BUILD_NUMBER}.0","repositoryName": "${repoName}"}], "branchName":"main"}""")
