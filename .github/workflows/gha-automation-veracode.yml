@@ -1,4 +1,4 @@
-name: Veracode security result with SNOW custom change
+name: Veracode static analysis with SNOW custom change
 
 on: workflow_dispatch
 
