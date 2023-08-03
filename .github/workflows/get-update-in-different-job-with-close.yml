@@ -33,8 +33,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         
-      - name: Custom Action GET
-        uses: maheshganji/custom-action-get@main    
+      - name: ServiceNow Get Change
+        uses: ServiceNow/servicenow-devops-get-change@main   
         # Uses an action in the root directory
         id: get
         with:
@@ -58,8 +58,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         
-      - name: Custom Action UPDATE
-        uses:  maheshganji/custom-action-update@master   
+      - name: ServiceNow Update Change
+        uses: ServiceNow/servicenow-devops-update-change@main
         # Uses an action in the root directory
         id: update
         with:
