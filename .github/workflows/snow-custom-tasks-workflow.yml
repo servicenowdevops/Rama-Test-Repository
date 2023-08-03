@@ -103,8 +103,8 @@ jobs:
             - name: ServiceNow DevOps Sonar Scan Results
             # You may pin to the exact commit or the version.
             # uses: ServiceNow/servicenow-devops-sonar@0ed32c6471c8191f264d4bd464f14c858032354a
-              uses: ServiceNow/servicenow-devops-sonar@v1.34.2      
-            # uses: ServiceNow/servicenow-devops-sonar@main
+            # uses: ServiceNow/servicenow-devops-sonar@v1.34.2      
+              uses: ServiceNow/servicenow-devops-sonar@main
               with:
                   # ServiceNow Instance URL
                   instance-url: ${{ secrets.SN_INSTANCE_URL }}
@@ -129,8 +129,8 @@ jobs:
             - name: ServiceNow DevOps Unit Test Results
             # You may pin to the exact commit or the version.
             # uses: ServiceNow/servicenow-devops-test-report@6c7ef85f6aedfb7ab17e4d17c52c14c5f2f455fd
-              uses: ServiceNow/servicenow-devops-test-report@v1.34.2            
-            # uses: ServiceNow/servicenow-devops-test-report@main
+              uses: ServiceNow/servicenow-devops-test-report@main
+            # uses: ServiceNow/servicenow-devops-test-report@v1.34.2 
               with:
                   # Devops Integration User Name
                   devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
@@ -163,7 +163,7 @@ jobs:
 #                   scantimeout: 20
 
             - name: ServiceNow DevOps Security Results
-              uses: maheshganji/custom-action-get@sonar
+              uses: ServiceNow/servicenow-devops-security-result@main
               with:
                   devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
                   devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
@@ -183,8 +183,8 @@ jobs:
             - name: ServiceNow DevOps Register Artifact
             # You may pin to the exact commit or the version.
             # uses: ServiceNow/servicenow-devops-register-artifact@6312802fd9eecd4a57b13216e968b8cae4ff6fe4
-            # uses: ServiceNow/servicenow-devops-register-artifact@main            
-              uses: ServiceNow/servicenow-devops-register-artifact@v1.34.2
+            # uses: ServiceNow/servicenow-devops-register-artifact@v1.34.2            
+              uses: ServiceNow/servicenow-devops-register-artifact@main
               with:
                   # Devops Integration User Name
                   devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
@@ -223,8 +223,8 @@ jobs:
             - name: ServiceNow DevOps Register Package
             # You may pin to the exact commit or the version.
             # uses: ServiceNow/servicenow-devops-register-package@96a351e6f06e592011b9bdd7da5b2af26506d86b
-            # uses: ServiceNow/servicenow-devops-register-package@main            
-              uses: ServiceNow/servicenow-devops-register-package@v1.34.2
+            # uses: ServiceNow/servicenow-devops-register-package@v1.34.2            
+              uses: ServiceNow/servicenow-devops-register-package@main
               with:
                   # ServiceNow Devops Integration User Name
                   devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
@@ -272,7 +272,7 @@ jobs:
             # You may pin to the exact commit or the version.
             # uses: ServiceNow/servicenow-devops-change@0f57435999463cc1dea44bde4f5eca9879474b85
             # uses: ServiceNow/servicenow-devops-change@main            
-              uses: ServiceNow/servicenow-devops-change@dev2
+              uses: ServiceNow/servicenow-devops-change@main
               with:
                   # ServiceNow Instance URL
                   instance-url: ${{ secrets.SN_INSTANCE_URL }}
