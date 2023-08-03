@@ -72,7 +72,7 @@ jobs:
           instance-url: ${{ secrets.SN_INSTANCE_URL }}
           context-github: ${{ toJSON(github) }}
           tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
-          change-request: '{ "short_description":"Updated short_description abcdefghijklmnopqrstuvwxyz"}' #Working Version
+          change-request-details: '{ "short_description":"Updated short_description abcdefghijklmnopqrstuvwxyz"}' #Working Version
       
       - name: Output of UPDATE change
         run: echo "The Status of Update Change Request Details => ${{ steps.update.outputs.status }}"  
