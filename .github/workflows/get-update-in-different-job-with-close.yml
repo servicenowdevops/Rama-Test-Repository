@@ -23,7 +23,7 @@ jobs:
           timeout: '3600'
 
   custom_action_get_change:
-    #needs: changeApproval
+    needs: changeApproval
     runs-on: ubuntu-latest
     outputs:
       changeRequestNumber: ${{ steps.get.outputs.change-request-number }}
