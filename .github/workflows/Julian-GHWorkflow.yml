@@ -38,7 +38,7 @@ jobs:
            tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
            context-github: ${{ toJSON(github) }}
            #job-name: 'Post Implementation UAT GET'
-           change-details: '{"build_number":"7","pipeline_name":"","stage_name":"Prepare-UAT-Deployment"}'
+           change-details: '{"build_number":"5795810314","pipeline_name":"","stage_name":"Prepare-UAT-Deployment"}'
 
        - name: Output of post_implementation_uat_get
          run: echo "change-request-number = ${{ steps.get.outputs.change-request-number }}" >> $GITHUB_OUTPUT    
