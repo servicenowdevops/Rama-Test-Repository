@@ -30,7 +30,7 @@ jobs:
          changeRequestNumber: ${{ steps.get.outputs.change-request-number }}
      steps:
        - name: ServiceNow Get Change
-         uses: ServiceNow/servicenow-devops-get-change@main
+         uses: ServiceNow/servicenow-devops-get-change@v2.0.0
          id: get
          with:
            devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
