@@ -57,4 +57,5 @@ jobs:
            tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
            instance-url: ${{ secrets.SN_INSTANCE_URL }}
            context-github: ${{ toJSON(github) }}
-           change-request-details: '{"state":"3","close_code":"successful", "close_notes":"Deployment to PROD was successful"}'
+           change-request-details: '{"work_notes":"updated work_notes"}'
+#change-request-details: '{"state":"3","close_code":"successful", "close_notes":"Deployment to PROD was successful"}'
