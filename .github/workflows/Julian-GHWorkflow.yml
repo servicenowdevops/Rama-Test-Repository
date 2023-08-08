@@ -4,7 +4,7 @@ on:
 
 jobs:
   deployment_uat:
-    name: ServiceNow Change Approval
+    name: Prepare-UAT-Deployment
     runs-on: ubuntu-latest   
     steps:     
       - name: ServiceNow Change Approval
