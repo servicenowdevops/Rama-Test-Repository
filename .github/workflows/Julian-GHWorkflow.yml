@@ -39,6 +39,9 @@ jobs:
            context-github: ${{ toJSON(github) }}
            #job-name: 'Post Implementation UAT GET'
            change-details: '{"build_number":"","pipeline_name":"","stage_name":"Prepare-UAT-Deployment"}'
+
+       - name: Output of post_implementation_uat_get
+         run: echo "change-request-number = ${{ steps.get.outputs.change-request-number }}" >> $GITHUB_OUTPUT    
    
   post_implementation_uat_update:
      name: Post Implementation UAT UPDATE
