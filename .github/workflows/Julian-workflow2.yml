@@ -47,7 +47,7 @@ jobs:
          uses: ServiceNow/servicenow-devops-update-change@scratch/test
          id: update
          with:
-           change-request-number: 'CHG0030112'
+           change-request-number: ${{ steps.get.outputs.change-request-number }}
            devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
            tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
            instance-url: ${{ secrets.SN_INSTANCE_URL }}
