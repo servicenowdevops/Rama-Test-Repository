@@ -47,10 +47,12 @@ jobs:
          uses: ServiceNow/servicenow-devops-update-change@scratch/test
          id: update
          with:
-           change-request-number: '${{needs.post_implementation_uat.outputs.changeRequestNumber}}'
+           change-request-number: 'CHG0030112'
            devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
            tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
            instance-url: ${{ secrets.SN_INSTANCE_URL }}
            context-github: ${{ toJSON(github) }}
            change-request-details: '{"close_code":"successful", "close_notes":"Deployment to PROD was successful","state":"3"}'
+
+#change-request-number: '${{needs.post_implementation_uat.outputs.changeRequestNumber}}'           
 #change-request-details: '{"state":"3","close_code":"successful", "close_notes":"Deployment to PROD was successful"}'
