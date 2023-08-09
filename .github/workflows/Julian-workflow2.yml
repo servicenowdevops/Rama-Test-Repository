@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest   
     steps:     
       - name: ServiceNow Change Approval
-        uses: ServiceNow/servicenow-devops-change@v2
+        uses: ServiceNow/servicenow-devops-change@2
         id: create
         with:
           devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
@@ -30,7 +30,7 @@ jobs:
          changeRequestNumber: ${{ steps.get.outputs.change-request-number }}
      steps:
        - name: ServiceNow Get Change
-         uses: ServiceNow/servicenow-devops-get-change@v2
+         uses: ServiceNow/servicenow-devops-get-change@2
          id: get
          with:
            devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
@@ -43,7 +43,7 @@ jobs:
          run: echo "change-request-number = ${{ steps.get.outputs.change-request-number }}" >> $GITHUB_OUTPUT    
 
        - name: Servicenow Update Change Details
-         uses: ServiceNow/servicenow-devops-update-change@v2
+         uses: ServiceNow/servicenow-devops-update-change@2
          id: update
          with:
            change-request-number: ${{ steps.get.outputs.change-request-number }}
