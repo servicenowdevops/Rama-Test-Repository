@@ -59,7 +59,7 @@ stages:
                 echo 'Hello world'
           - task: ServiceNow-DevOps-Agent-Artifact-Registration@1
             inputs:
-              connectedServiceName: 'devopstokyonightly2-BASIC Project.`!^()_-1-ServiceNow DevOps Service Connection'
+              connectedServiceName: 'devopsriutah-Basic Project1-ServiceNow DevOps Service Connection'
               artifactsPayload: |
                 {
                     "artifacts":
@@ -74,7 +74,7 @@ stages:
                 }
           - task: ServiceNow-DevOps-Agent-Package-Registration@1
             inputs:
-              connectedServiceName: 'devopstokyonightly2-BASIC Project.`!^()_-1-ServiceNow DevOps Service Connection'
+              connectedServiceName: 'devopsriutah-Basic Project1-ServiceNow DevOps Service Connection'
               packageName: 'package-devops-3.0.0-SNAPSHOT.zip'
               artifactsPayload: |
                 {
@@ -102,7 +102,7 @@ stages:
         steps:
           - task: ServiceNow-DevOps-Server-Change-Acceleration@1
             inputs:
-              connectedServiceName: 'devopstokyonightly2-BASIC Project.`!^()_-1-ServiceNow DevOps Service Connection'
+              connectedServiceName: 'devopsriutah-Basic Project1-ServiceNow DevOps Service Connection'
               UpstreamJob: 'Job_Deploy'
               changeRequestDetails: |
                 {
