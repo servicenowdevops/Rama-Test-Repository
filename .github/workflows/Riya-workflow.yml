@@ -3,20 +3,47 @@ on:
   workflow_dispatch:
 
 jobs:
-  changeApproval:
-    name: Change
-    runs-on: ubuntu-latest
-    steps:     
-      - name: ServiceNow DevOps Change Automation
-        uses: ServiceNow/servicenow-devops-change@main
-        id: create
-        with:
-          devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
-          devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
-          instance-url: ${{ secrets.SN_INSTANCE_URL }}
-          tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
-          context-github: ${{ toJSON(github) }}
-          job-name: 'Change'
-          change-request: '{ "attributes": {"type": "normal", "template": "8935759bc36cf910f11d3641150131f8"}}'
-          interval: '100'
-          timeout: '3600'
+  # changeApproval:
+  #   name: Change
+  #   runs-on: ubuntu-latest
+  #   steps:     
+  #     - name: ServiceNow DevOps Change Automation
+  #       uses: ServiceNow/servicenow-devops-change@main
+  #       id: create
+  #       with:
+  #         devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
+  #         devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
+  #         instance-url: ${{ secrets.SN_INSTANCE_URL }}
+  #         tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+  #         context-github: ${{ toJSON(github) }}
+  #         job-name: 'Change'
+  #         change-request: '{ "attributes": {"type": "normal", "template": "8935759bc36cf910f11d3641150131f8"}}'
+  #         interval: '100'
+  #         timeout: '3600'
+    deploy:
+        #if: github.event.pull_request.merged == true
+        name: Deploy
+        runs-on: ubuntu-latest
+        steps:     
+            - name: ServiceNow DevOps Change Automation
+            # You may pin to the exact commit or the version.            
+              uses: ServiceNow/servicenow-devops-change@main
+              with:
+                  # ServiceNow Instance URL
+                  instance-url: ${{ secrets.SN_INSTANCE_URL }}
+                  # Devops Integration User Name
+                  devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
+                  # Devops Integration User Password
+                  devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
+                  # Orchestration Tool Id
+                  tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+                  # Display Name of the Job
+                  job-name: 'Deploy'
+                  # Github Context
+                  context-github: ${{ toJSON(github) }}
+                  # The max. time in seconds to wait until the action should fail.
+                  timeout: 3600 # optional, default is 3600
+                  # The time in seconds to wait between trying the API.
+                  interval: 100 # optional, default is 100
+                  # The customized inputs to create change with the requested details
+                  change-request: '{ "attributes": {"type": "normal", "template": "8935759bc36cf910f11d3641150131f8"}}'
