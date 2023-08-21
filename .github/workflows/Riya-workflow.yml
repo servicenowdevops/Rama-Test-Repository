@@ -6,7 +6,7 @@ on:
 
 jobs:
   changeApproval:
-    name: ServiceNow-Change-Approval
+    name: change123
     runs-on: ubuntu-latest
     steps:     
       - name: ServiceNow DevOps Change Automation
@@ -18,7 +18,7 @@ jobs:
           instance-url: ${{ secrets.SN_INSTANCE_URL }}
           tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
           context-github: ${{ toJSON(github) }}
-          job-name: 'ServiceNow-Change-Approval'
+          job-name: 'change123'
           change-request: '{ "attributes": {"chg_model":{"name":"standard"}, "template": "1c8e02ec47410200e90d87e8dee49057abc"}}'
           interval: '100'
           timeout: '3600'
