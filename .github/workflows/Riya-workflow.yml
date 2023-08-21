@@ -47,7 +47,6 @@ jobs:
                   interval: 100 # optional, default is 100
                   # The customized inputs to create change with the requested details
                   change-request: '{
-                      "setCloseCode": "true",
                       "attributes": {
                           "short_description": "Automated Software Deployment",
                           "description": "Automated Software Deployment.",
