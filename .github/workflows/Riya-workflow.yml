@@ -48,7 +48,7 @@ jobs:
                   # The customized inputs to create change with the requested details
                   change-request: '{
                       "attributes": {
-                          "type": "normal",
+                          "chg_model": {"name": "standard"},
                           "template": "1c8e02ec47410200e90d87e8dee49057"
                       }
                   }'
