@@ -4,7 +4,7 @@ on:
 
 jobs:
   changeApproval:
-    name: ServiceNow DevOps Change Automation
+    name: Change
     runs-on: ubuntu-latest
     steps:     
       - name: ServiceNow DevOps Change Automation
@@ -16,7 +16,7 @@ jobs:
           instance-url: ${{ secrets.SN_INSTANCE_URL }}
           tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
           context-github: ${{ toJSON(github) }}
-          job-name: 'ServiceNow DevOps Change Automation'
+          job-name: 'Change'
           change-request: '{ "attributes": {"type": "normal", "template": "8935759bc36cf910f11d3641150131f8"}}'
           interval: '100'
           timeout: '3600'
