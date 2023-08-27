@@ -114,6 +114,7 @@ stages:
                     "category": "DevOps",
                     "priority": "2",
                     "start_date": "2022-01-05 11:59:59",
-                    "end_date": "2022-01-08 11:59:59"
+                    "end_date": "2022-01-08 11:59:59",
+                    "service_offering": "f07181a783303510f36cdf647daad387"
                     }
                 }
