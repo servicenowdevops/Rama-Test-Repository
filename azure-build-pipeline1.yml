@@ -115,7 +115,39 @@ stages:
                     "priority": "2",
                     "start_date": "2022-01-05 11:59:59",
                     "end_date": "2022-01-08 11:59:59",
-                    "risk": "4",
-                    "impact": "3"
+                    "template": "1eddcf2b83f83510f36cdf647daad31b"
                     }
+                }
+  
+  - stage: GET-UPDATE
+    dependsOn: Test
+    jobs:
+      - job: Job_Deploy
+        steps:
+          - task: Bash@3
+            inputs:
+              targetType: inline
+              script: |
+                # Write your commands here                  
+                echo 'Hello world'
+          - task: ServiceNow-DevOps-Agent-Get-Change@1
+            inputs:
+              connectedServiceName: 'devopsqerama92-Basic Project1-ServiceNow DevOps Service Connection'
+              projectName: '$(system.teamProject)'
+              pipelineName: '$(build.definitionName)'
+              stageName: '$(System.StageName)'
+              jobName: '$(System.JobDisplayName)'
+              buildNumber: '$(build.buildId)'
+              attemptNumber: '$(System.JobAttempt)'
+              branchName: '$(Build.SourceBranchName)'
+          
+          - task: ServiceNow-DevOps-Agent-Update-Change@1
+            inputs:
+              connectedServiceName: 'devopsqerama92-Basic Project1-ServiceNow DevOps Service Connection'
+              changeRequestNumber: 'CHG0030013'
+              changeRequestDetails: |
+                {
+                "short_description": "Updating the short_description",
+                "work_notes": "updated work notes",
+                "description": "change description updating"
                 }
