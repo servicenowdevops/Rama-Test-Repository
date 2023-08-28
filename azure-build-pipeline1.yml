@@ -115,7 +115,8 @@ stages:
                     "priority": "2",
                     "start_date": "2022-01-05 11:59:59",
                     "end_date": "2022-01-08 11:59:59",
-                    "template": "1eddcf2b83f83510f36cdf647daad31b"
+                    "template": "1eddcf2b83f83510f36cdf647daad31b",
+                    "business_service": "26da329f0a0a0bb400f69d8159bc753d"
                     }
                 }
   
