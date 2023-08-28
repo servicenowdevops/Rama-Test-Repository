@@ -119,10 +119,10 @@ stages:
                     }
                 }
   
-  - stage: GET_UPDATE change
-    dependsOn: Test
+  - stage: GETUPDATEchange
+    dependsOn: Prod
     jobs:
-      - job: Job_Deploy
+      - job: Job_GETUPDATEchange
         steps:
           - task: Bash@3
             inputs:
