@@ -119,7 +119,7 @@ stages:
                     }
                 }
   
-  - stage: GET-UPDATE
+  - stage: GET_UPDATE change
     dependsOn: Test
     jobs:
       - job: Job_Deploy
