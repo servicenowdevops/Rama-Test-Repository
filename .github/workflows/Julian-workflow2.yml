@@ -1,7 +1,8 @@
 name: Julian workflow
 on: 
   workflow_dispatch:
-
+env:
+  pipelineName: "pramaraju96/DevOps-Test/Julian workflow"
 jobs:
   deployment_uat:
     name: Prepare-UAT-Deployment
