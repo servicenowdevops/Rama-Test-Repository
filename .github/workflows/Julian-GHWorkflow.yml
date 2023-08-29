@@ -1,7 +1,8 @@
 name: Julian workflow
 on: 
   workflow_dispatch:
-
+env:
+  pipelineName: "pramaraju96/DevOps-Test/Julian workflow"
 jobs:
   deployment_uat:
     name: Prepare-UAT-Deployment
@@ -37,7 +38,7 @@ jobs:
            instance-url: ${{ secrets.SN_INSTANCE_URL }}
            tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
            context-github: ${{ toJSON(github) }}
-           change-details: '{"build_number":"","pipeline_name":"","stage_name":"Prepare-UAT-Deployment"}'
+           change-details: '{"build_number":"${{ github.run_id }}","pipeline_name":"${{ env.pipelineName }}","stage_name":"Prepare-UAT-Deployment"}'
 
        - name: Output of post_implementation_uat_get
          run: echo "change-request-number = ${{ steps.get.outputs.change-request-number }}" >> $GITHUB_OUTPUT    
