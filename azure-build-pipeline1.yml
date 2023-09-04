@@ -64,91 +64,129 @@ stages:
                 {
                     "artifacts":
                     [
-                        {
-                            "name": "artifact-app-devops-3.0.0-SNAPSHOT.jar",
-                            "version": "1.$(Build.BuildId)",
-                            "semanticVersion": "1.$(Build.BuildId).0",
-                            "repositoryName": "DevOps-Test"
-                        }
-                    ]
-                }
-          - task: ServiceNow-DevOps-Agent-Package-Registration@1
-            inputs:
-              connectedServiceName: 'devopsqerama92-Basic Project1-ServiceNow DevOps Service Connection'
-              packageName: 'package-devops-3.0.0-SNAPSHOT.zip'
-              artifactsPayload: |
-                {
-                    "artifacts": [
                     {
-                        "name": "artifact-app-devops-3.0.0-SNAPSHOT.jar",
+                        "name": "alpha",
                         "repositoryName": "DevOps-Test",
                         "version": "1.$(build.buildId)",
                         "pipelineName":"$(system.teamProject)/$(build.definitionName)",
                         "taskExecutionNumber":"$(build.buildId)",
                         "stageName":"$(system.jobDisplayName)",
                         "branchName":"$(build.sourceBranchName)"
-                    }],
-                    "pipelineName":"$(system.teamProject)/$(build.definitionName)",
-                    "taskExecutionNumber":"$(build.buildId)",
-                    "stageName":"$(system.jobDisplayName)",
-                    "branchName":"$(build.sourceBranchName)"
-                }
-  - stage: Prod
-    dependsOn: Deploy
-    jobs:
-      - job: Job_Prod
-        pool:
-          name: server
-        steps:
-          - task: ServiceNow-DevOps-Server-Change-Acceleration@1
-            inputs:
-              connectedServiceName: 'devopsqerama92-Basic Project1-ServiceNow DevOps Service Connection'
-              UpstreamJob: 'Job_Deploy'
-              changeRequestDetails: |
-                {
-                  "setCloseCode": false,
-                  "attributes": {
-                    "requested_by": {
-                        "name": "DevOps System"
                     },
-                    "category": "DevOps",
-                    "priority": "2",
-                    "start_date": "2022-01-05 11:59:59",
-                    "end_date": "2022-01-08 11:59:59",
-                    "template": "1eddcf2b83f83510f36cdf647daad31b",
-                    "service_offering": null
-                    }
+                    {
+                        "name": "beta",
+                        "repositoryName": "DevOps-Test",
+                        "version": "1.$(build.buildId)",
+                        "pipelineName":"$(system.teamProject)/$(build.definitionName)",
+                        "taskExecutionNumber":"$(build.buildId)",
+                        "stageName":"$(system.jobDisplayName)",
+                        "branchName":"$(build.sourceBranchName)"
+                    },
+                    {
+                        "name": "gamma",
+                        "repositoryName": "DevOps-Test",
+                        "version": "1.$(build.buildId)",
+                        "pipelineName":"$(system.teamProject)/$(build.definitionName)",
+                        "taskExecutionNumber":"$(build.buildId)",
+                        "stageName":"$(system.jobDisplayName)",
+                        "branchName":"$(build.sourceBranchName)"
+                    }]
                 }
+  #         - task: ServiceNow-DevOps-Agent-Package-Registration@1
+  #           inputs:
+  #             connectedServiceName: 'devopsqerama92-Basic Project1-ServiceNow DevOps Service Connection'
+  #             packageName: 'package-devops-3.0.0-SNAPSHOT.zip'
+  #             artifactsPayload: |
+  #               {
+  #                   "artifacts": [
+  #                   {
+  #                       "name": "alpha",
+  #                       "repositoryName": "DevOps-Test",
+  #                       "version": "1.$(build.buildId)",
+  #                       "pipelineName":"$(system.teamProject)/$(build.definitionName)",
+  #                       "taskExecutionNumber":"$(build.buildId)",
+  #                       "stageName":"$(system.jobDisplayName)",
+  #                       "branchName":"$(build.sourceBranchName)"
+  #                   },
+  #                   {
+  #                       "name": "beta",
+  #                       "repositoryName": "DevOps-Test",
+  #                       "version": "1.$(build.buildId)",
+  #                       "pipelineName":"$(system.teamProject)/$(build.definitionName)",
+  #                       "taskExecutionNumber":"$(build.buildId)",
+  #                       "stageName":"$(system.jobDisplayName)",
+  #                       "branchName":"$(build.sourceBranchName)"
+  #                   },
+  #                   {
+  #                       "name": "gamma",
+  #                       "repositoryName": "DevOps-Test",
+  #                       "version": "1.$(build.buildId)",
+  #                       "pipelineName":"$(system.teamProject)/$(build.definitionName)",
+  #                       "taskExecutionNumber":"$(build.buildId)",
+  #                       "stageName":"$(system.jobDisplayName)",
+  #                       "branchName":"$(build.sourceBranchName)"
+  #                   }],
+  #                   "pipelineName":"$(system.teamProject)/$(build.definitionName)",
+  #                   "taskExecutionNumber":"$(build.buildId)",
+  #                   "stageName":"$(system.jobDisplayName)",
+  #                   "branchName":"$(build.sourceBranchName)"
+  #               }
+  # - stage: Prod
+  #   dependsOn: Deploy
+  #   jobs:
+  #     - job: Job_Prod
+  #       pool:
+  #         name: server
+  #       steps:
+  #         - task: ServiceNow-DevOps-Server-Change-Acceleration@1
+  #           inputs:
+  #             connectedServiceName: 'devopsqerama92-Basic Project1-ServiceNow DevOps Service Connection'
+  #             UpstreamJob: 'Job_Deploy'
+  #             changeRequestDetails: |
+  #               {
+  #                 "setCloseCode": false,
+  #                 "attributes": {
+  #                   "requested_by": {
+  #                       "name": "DevOps System"
+  #                   },
+  #                   "category": "DevOps",
+  #                   "priority": "2",
+  #                   "start_date": "2022-01-05 11:59:59",
+  #                   "end_date": "2022-01-08 11:59:59",
+  #                   "template": "1eddcf2b83f83510f36cdf647daad31b",
+  #                   "service_offering": null
+  #                   }
+  #               }
   
-  - stage: GETUPDATEchange
-    dependsOn: Prod
-    jobs:
-      - job: Job_GETUPDATEchange
-        steps:
-          - task: Bash@3
-            inputs:
-              targetType: inline
-              script: |
-                # Write your commands here                  
-                echo 'Hello world'
-          - task: ServiceNow-DevOps-Agent-Get-Change@1
-            inputs:
-              connectedServiceName: 'devopsqerama92-Basic Project1-ServiceNow DevOps Service Connection'
-              projectName: '$(system.teamProject)'
-              pipelineName: '$(build.definitionName)'
-              stageName: '$(System.StageName)'
-              jobName: '$(System.JobDisplayName)'
-              buildNumber: '$(build.buildId)'
-              attemptNumber: '$(System.JobAttempt)'
-              branchName: '$(Build.SourceBranchName)'
+  # - stage: GETUPDATEchange
+  #   dependsOn: Prod
+  #   jobs:
+  #     - job: Job_GETUPDATEchange
+  #       steps:
+  #         - task: Bash@3
+  #           inputs:
+  #             targetType: inline
+  #             script: |
+  #               # Write your commands here                  
+  #               echo 'Hello world'
+  #         - task: ServiceNow-DevOps-Agent-Get-Change@1
+  #           inputs:
+  #             connectedServiceName: 'devopsqerama92-Basic Project1-ServiceNow DevOps Service Connection'
+  #             projectName: '$(system.teamProject)'
+  #             pipelineName: '$(build.definitionName)'
+  #             stageName: '$(System.StageName)'
+  #             jobName: '$(System.JobDisplayName)'
+  #             buildNumber: '$(build.buildId)'
+  #             attemptNumber: '$(System.JobAttempt)'
+  #             branchName: '$(Build.SourceBranchName)'
           
-          - task: ServiceNow-DevOps-Agent-Update-Change@1
-            inputs:
-              connectedServiceName: 'devopsqerama92-Basic Project1-ServiceNow DevOps Service Connection'
-              changeRequestNumber: 'CHG0030013'
-              changeRequestDetails: |
-                {
-                "short_description": "Updating the short_description",
-                "work_notes": "updated work notes",
-                "description": "change description updating"
-                }
+  #         - task: ServiceNow-DevOps-Agent-Update-Change@1
+  #           inputs:
+  #             connectedServiceName: 'devopsqerama92-Basic Project1-ServiceNow DevOps Service Connection'
+  #             changeRequestNumber: 'CHG0030013'
+  #             changeRequestDetails: |
+  #               {
+  #               "short_description": "Updating the short_description",
+  #               "work_notes": "updated work notes",
+  #               "description": "change description updating"
+  #               }
