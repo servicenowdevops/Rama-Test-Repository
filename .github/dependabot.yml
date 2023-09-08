@@ -9,12 +9,12 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
-      time: "03:00"
+      time: "15:25"
       timezone: "Asia/Kolkata"
   
   - package-ecosystem: "testng" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
-      time: "03:00"
+      time: "15:25"
       timezone: "Asia/Kolkata"
