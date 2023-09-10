@@ -159,7 +159,7 @@ stages:
               UpstreamJob: 'Job_Deploy'
               changeRequestDetails: |
                 {
-                  "setCloseCode": false,
+                  "setCloseCode": true,
                   "attributes": {
                     "requested_by": {
                         "name": "DevOps System"
@@ -167,7 +167,8 @@ stages:
                     "category": "DevOps",
                     "priority": "2",
                     "start_date": "2022-01-05 11:59:59",
-                    "end_date": "2022-01-08 11:59:59"
+                    "end_date": "2022-01-08 11:59:59",
+                    "chg_model": {"name": "devops"}
                     }
                 }
   
