@@ -180,9 +180,16 @@ stages:
               method: 'POST'
               body: |
                 {
-                "buildNumber":"$(build.buildId)",
-                "isMultiBranch":"false",
-                "branchName":"$(build.sourceBranchName)"
+                  "buildNumber":"$(build.buildId)",
+                  "isMultiBranch":"false",
+                  "branchName":"$(build.sourceBranchName)".
+                  "changeRequestDetails":{
+                    "setCloseCode": true,
+                    "attributes":{
+                      "chg_model": {"name": "DevOps"},
+                      "assignment_group":"a715cd759f2002002920bde8132e7018"
+                    }
+                  }
                 }
               urlSuffix: 'api/sn_devops/v1/devops/orchestration/changeControl?toolId=a104cc8c47d93110bf04bf15126d4378&projectId=460440cc47d93110bf04bf15126d439b'
               waitForCompletion: 'true'
