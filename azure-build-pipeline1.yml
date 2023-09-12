@@ -46,17 +46,21 @@ stages:
               effectivePomSkip: false
               sonarQubeRunAnalysis: false
 
-          # - task: ServiceNow-DevOps-Build-Security-Results@1
-          #   inputs:
-          #     connectedServiceName: 'devopsqerama92-Basic Project1-ServiceNow DevOps Service Connection'
-          #     securityResultAttributes: |
-          #       {
-          #       "scanner": "CheckmarxOne", #Scanning tool and is required e.g. CheckmarxOne.
-          #       "projectName": "DemoProject", #Name of your CheckMarxOne project and is required. This attribute is applicable only for CheckmarxOne.
-          #       "projectId": "75acb348-c054-4ab3-807d-e17e92a923ab", #Id of your CheckMarxOne project and can be used instead of projectName field. This attribute is applicable only for CheckmarxOne.
-          #       "scanId": "c8053f9d-8047-44ae-8972-dc5176b7dd67", #CheckmarxOne scan id and is optional. This attribute is applicable only for CheckmarxOne.
-          #       "securityToolId": "b8d81b8fc3bc7110c825371f05013174" #Security tool onboarded in ServiceNow (sys_id of the onboarded security tool) and is optional.
-          #       }
+          - task: ServiceNow-DevOps-Build-Sonar-Registration@1
+            inputs:
+              connectedServiceName: 'devopstokyo139-Basic Project1-ServiceNow DevOps Service Connection'
+              sonarProjectKey: 'pramaraju96_DevOps-Test'
+              sonarInstanceUrl: 'https://sonarcloud.io'
+
+          - task: ServiceNow-DevOps-Build-Security-Results@1
+            inputs:
+              connectedServiceName: 'devopstokyo139-Basic Project1-ServiceNow DevOps Service Connection'
+              securityResultAttributes: |
+                {
+                 "scanner": "Veracode", 
+                 "applicationName": "VeraDemo10", 
+                 "securityToolId": "12deb11847d5b110bf04bf15126d4354" 
+                }
 
   - stage: Deploy
     dependsOn: Test
@@ -114,7 +118,7 @@ stages:
                     "artifacts": [
                     {
                         "name": "alpha",
-                        "repositoryName": "DevOps-Test",
+                        "repositoryName": "$(build.definitionName)",
                         "version": "1.$(build.buildId)",
                         "pipelineName":"$(system.teamProject)/$(build.definitionName)",
                         "taskExecutionNumber":"$(build.buildId)",
@@ -123,7 +127,7 @@ stages:
                     },
                     {
                         "name": "beta",
-                        "repositoryName": "DevOps-Test",
+                        "repositoryName": "$(build.definitionName)",
                         "version": "1.$(build.buildId)",
                         "pipelineName":"$(system.teamProject)/$(build.definitionName)",
                         "taskExecutionNumber":"$(build.buildId)",
@@ -132,7 +136,7 @@ stages:
                     },
                     {
                         "name": "gamma",
-                        "repositoryName": "DevOps-Test",
+                        "repositoryName": "$(build.definitionName)",
                         "version": "1.$(build.buildId)",
                         "pipelineName":"$(system.teamProject)/$(build.definitionName)",
                         "taskExecutionNumber":"$(build.buildId)",
@@ -173,26 +177,27 @@ stages:
                     }
                 }
 
-          - task: InvokeRESTAPI@1
-            inputs:
-              connectionType: 'connectedServiceName'
-              serviceConnection: 'devopstokyo139-Basic Project1-Generic Connection'
-              method: 'POST'
-              body: |
-                {
-                  "buildNumber":"$(build.buildId)",
-                  "isMultiBranch":"false",
-                  "branchName":"$(build.sourceBranchName)",
-                  "changeRequestDetails":{
-                    "setCloseCode": true,
-                    "attributes":{
-                      "chg_model": {"name": "DevOps"},
-                      "assignment_group":"a715cd759f2002002920bde8132e7018"
-                    }
-                  }
-                }
-              urlSuffix: 'api/sn_devops/v1/devops/orchestration/changeControl?toolId=a104cc8c47d93110bf04bf15126d4378&projectId=460440cc47d93110bf04bf15126d439b'
-              waitForCompletion: 'true'
+          # - task: InvokeRESTAPI@1
+          #   inputs:
+          #     connectionType: 'connectedServiceName'
+          #     serviceConnection: 'devopstokyo139-Basic Project1-Generic Connection'
+          #     method: 'POST'
+          #     body: |
+          #       {
+          #         "buildNumber":"$(build.buildId)",
+          #         "isMultiBranch":"false",
+          #         "branchName":"$(build.sourceBranchName)",
+          #         "changeRequestDetails":{
+          #           "setCloseCode": true,
+          #           "attributes":{
+          #             "chg_model": {"name": "DevOps"},
+          #             "assignment_group":"a715cd759f2002002920bde8132e7018"
+          #           }
+          #         }
+          #       }
+          #     urlSuffix: 'api/sn_devops/v1/devops/orchestration/changeControl?toolId=a104cc8c47d93110bf04bf15126d4378&projectId=460440cc47d93110bf04bf15126d439b'
+          #     waitForCompletion: 'true'
+
   
   # - stage: GETUPDATEchange
   #   dependsOn: Prod
