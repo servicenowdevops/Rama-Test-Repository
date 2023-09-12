@@ -158,17 +158,17 @@ jobs:
 #                   #deleteincompletescan: 1
 #                   scantimeout: 20
 
-            # - name: ServiceNow DevOps Security Results
-            #   uses: ServiceNow/servicenow-devops-security-result@v2.0.0
-            #   with:
-            #       devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
-            #       devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
-            #       devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
-            #       instance-url: ${{ secrets.SN_INSTANCE_URL }}
-            #       tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
-            #       context-github: ${{ toJSON(github) }}
-            #       job-name: 'Test'
-            #       security-result-attributes: '{ "scanner": "${{ secrets.SCANNER_NAME }}", "applicationName": "${{ secrets.VULNERABILITY_APPLICATION_NAME }}", "securityToolId": "ae9964e847dd35504c2ce977746d43c4" }'                  
+            - name: ServiceNow DevOps Security Results
+              uses: ServiceNow/servicenow-devops-security-result@v2.0.0
+              with:
+                  devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
+                  devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
+                  devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
+                  instance-url: ${{ secrets.SN_INSTANCE_URL }}
+                  tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+                  context-github: ${{ toJSON(github) }}
+                  job-name: 'Test'
+                  security-result-attributes: '{ "scanner": "${{ secrets.SCANNER_NAME }}", "applicationName": "${{ secrets.VULNERABILITY_APPLICATION_NAME }}", "securityToolId": "ae9964e847dd35504c2ce977746d43c4" }'                  
 
     integrationTest:
         #if: github.event.pull_request.merged == true
