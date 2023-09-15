@@ -97,6 +97,12 @@ jobs:
     needs: registerArtifact
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout
+      uses: actions/checkout@v4.0.0
+      with:
+        # Repository name with owner. For example, actions/checkout
+        repository: # optional, default is ${{ github.repository }}
+        
     - name: Sonar Cloud Analysis
       if: success() # always() failure() success()
       run: >
