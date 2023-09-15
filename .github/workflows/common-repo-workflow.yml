@@ -160,7 +160,7 @@ jobs:
           tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
           context-github: ${{ toJSON(github) }}
           job-name: 'Security Scan'
-          security-result-attributes: '{ "scanner": "${{ secrets.SCANNER_NAME }}", "applicationName": "${{ secrets.VULNERABILITY_APPLICATION_NAME }}", "securityToolId": "ae9964e847dd35504c2ce977746d43c4" }'
+          security-result-attributes: '{ "scanner": "${{ secrets.SCANNER_NAME }}", "applicationName": "${{ secrets.VULNERABILITY_APPLICATION_NAME }}", "securityToolId": "8b1cc9ad87d1b11067b2caa5cebb3557" }'
     
     - name: What's in the target directory
       run: |
