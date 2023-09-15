@@ -92,93 +92,93 @@ jobs:
               }
           ]'
 
-  sonarScan:
-    name: 'Sonar Scan'
-    needs: registerArtifact
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v4.0.0
-      with:
-        # Repository name with owner. For example, actions/checkout
-        repository: # optional, default is ${{ github.repository }}
+  # sonarScan:
+  #   name: 'Sonar Scan'
+  #   needs: registerArtifact
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Checkout
+  #     uses: actions/checkout@v4.0.0
+  #     with:
+  #       # Repository name with owner. For example, actions/checkout
+  #       repository: # optional, default is ${{ github.repository }}
 
-    # uncomment below lines of code to trigger a new Sonar scan        
-    # - name: Sonar Cloud Analysis
-    #   if: success() # always() failure() success()
-    #   run: >
-    #       mvn -B verify -DskipTests sonar:sonar
-    #       -Dsonar.projectKey=$SONAR_PROJECT_KEY
-    #       -Dsonar.organization=$SONAR_ORG_KEY
-    #       -Dsonar.host.url=$SONAR_URL
-    #       -Dsonar.login=$SONAR_TOKEN
-    #   env:
-    #       GITHUB_TOKEN: ${{ secrets.GHP_TOKEN }}
-    #       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-    #       SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
-    #       SONAR_URL: ${{ secrets.SONAR_URL }}
-    #       SONAR_ORG_KEY: ${{ secrets.SONAR_ORG_KEY }}
+  #   # uncomment below lines of code to trigger a new Sonar scan        
+  #   # - name: Sonar Cloud Analysis
+  #   #   if: success() # always() failure() success()
+  #   #   run: >
+  #   #       mvn -B verify -DskipTests sonar:sonar
+  #   #       -Dsonar.projectKey=$SONAR_PROJECT_KEY
+  #   #       -Dsonar.organization=$SONAR_ORG_KEY
+  #   #       -Dsonar.host.url=$SONAR_URL
+  #   #       -Dsonar.login=$SONAR_TOKEN
+  #   #   env:
+  #   #       GITHUB_TOKEN: ${{ secrets.GHP_TOKEN }}
+  #   #       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  #   #       SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
+  #   #       SONAR_URL: ${{ secrets.SONAR_URL }}
+  #   #       SONAR_ORG_KEY: ${{ secrets.SONAR_ORG_KEY }}
     
-    - name: ServiceNow DevOps Sonar Scan Results
-    # You may pin to the exact commit or the version.     
-      uses: ServiceNow/servicenow-devops-sonar@v2.0.0
-      with:
-          # ServiceNow Instance URL
-          instance-url: ${{ secrets.SN_INSTANCE_URL }}
-          # Devops Integration User Name
-          devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
-          # Devops Integration User Password
-          devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
-          # Orchestration Tool Id
-          tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
-          # Github Context
-          context-github: ${{ toJSON(github) }}
-          # Display Name of the Job
-          job-name: 'Sonar Scan'
-          # Sonar Host URL
-          sonar-host-url: ${{ secrets.SONAR_URL }}
-          # Sonar Project Key
-          sonar-project-key: ${{ secrets.SONAR_PROJECT_KEY }}
+  #   - name: ServiceNow DevOps Sonar Scan Results
+  #   # You may pin to the exact commit or the version.     
+  #     uses: ServiceNow/servicenow-devops-sonar@v2.0.0
+  #     with:
+  #         # ServiceNow Instance URL
+  #         instance-url: ${{ secrets.SN_INSTANCE_URL }}
+  #         # Devops Integration User Name
+  #         devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
+  #         # Devops Integration User Password
+  #         devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
+  #         # Orchestration Tool Id
+  #         tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+  #         # Github Context
+  #         context-github: ${{ toJSON(github) }}
+  #         # Display Name of the Job
+  #         job-name: 'Sonar Scan'
+  #         # Sonar Host URL
+  #         sonar-host-url: ${{ secrets.SONAR_URL }}
+  #         # Sonar Project Key
+  #         sonar-project-key: ${{ secrets.SONAR_PROJECT_KEY }}
 
-  securityScan:
-    name: 'Security Scan'
-    needs: sonarScan
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v4.0.0
-      with:
-        # Repository name with owner. For example, actions/checkout
-        repository: # optional, default is ${{ github.repository }}
+  # securityScan:
+  #   name: 'Security Scan'
+  #   needs: sonarScan
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Checkout
+  #     uses: actions/checkout@v4.0.0
+  #     with:
+  #       # Repository name with owner. For example, actions/checkout
+  #       repository: # optional, default is ${{ github.repository }}
 
-    # uncomment below lines of code to trigger a new Veracode scan
-    # - name: Veracode Upload And Scan
-    #   uses: veracode/veracode-uploadandscan-action@0.2.6
-    #   with:
-    #       appname: 'ServiceNow DevOps App#1'
-    #       createprofile: false
-    #       filepath: 'target/*.jar'
-    #       #version: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
-    #       vid: '${{ secrets.VERACODE_API_ID }}'
-    #       vkey: '${{ secrets.VERACODE_API_KEY }}'
-    #       #deleteincompletescan: 1
-    #       scantimeout: 20
+  #   # uncomment below lines of code to trigger a new Veracode scan
+  #   # - name: Veracode Upload And Scan
+  #   #   uses: veracode/veracode-uploadandscan-action@0.2.6
+  #   #   with:
+  #   #       appname: 'ServiceNow DevOps App#1'
+  #   #       createprofile: false
+  #   #       filepath: 'target/*.jar'
+  #   #       #version: ${{ github.run_id }}-${{ github.run_number }}-${{ github.run_attempt }}
+  #   #       vid: '${{ secrets.VERACODE_API_ID }}'
+  #   #       vkey: '${{ secrets.VERACODE_API_KEY }}'
+  #   #       #deleteincompletescan: 1
+  #   #       scantimeout: 20
 
-    - name: ServiceNow DevOps Security Results
-      uses: ServiceNow/servicenow-devops-security-result@v2.0.0
-      with:
-          devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
-          devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
-          devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
-          instance-url: ${{ secrets.SN_INSTANCE_URL }}
-          tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
-          context-github: ${{ toJSON(github) }}
-          job-name: 'Security Scan'
-          security-result-attributes: '{ "scanner": "${{ secrets.SCANNER_NAME }}", "applicationName": "${{ secrets.VULNERABILITY_APPLICATION_NAME }}", "securityToolId": "8b1cc9ad87d1b11067b2caa5cebb3557" }'
+  #   - name: ServiceNow DevOps Security Results
+  #     uses: ServiceNow/servicenow-devops-security-result@v2.0.0
+  #     with:
+  #         devops-integration-user-name: ${{ secrets.SN_DEVOPS_USER }}
+  #         devops-integration-user-password: ${{ secrets.SN_DEVOPS_PASSWORD }}
+  #         devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
+  #         instance-url: ${{ secrets.SN_INSTANCE_URL }}
+  #         tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+  #         context-github: ${{ toJSON(github) }}
+  #         job-name: 'Security Scan'
+  #         security-result-attributes: '{ "scanner": "${{ secrets.SCANNER_NAME }}", "applicationName": "${{ secrets.VULNERABILITY_APPLICATION_NAME }}", "securityToolId": "8b1cc9ad87d1b11067b2caa5cebb3557" }'
 
   registerPackage:
     name: 'Register Package'
-    needs: securityScan
+    needs: registerArtifact
     runs-on: ubuntu-latest
     steps:
     - name: ServiceNow DevOps Register Package
