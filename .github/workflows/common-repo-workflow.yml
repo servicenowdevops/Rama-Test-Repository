@@ -160,7 +160,13 @@ jobs:
           tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
           context-github: ${{ toJSON(github) }}
           job-name: 'Security Scan'
-          security-result-attributes: '{ "scanner": "${{ secrets.SCANNER_NAME }}", "applicationName": "${{ secrets.VULNERABILITY_APPLICATION_NAME }}", "securityToolId": "ae9964e847dd35504c2ce977746d43c4" }'                  
+          security-result-attributes: '{ "scanner": "${{ secrets.SCANNER_NAME }}", "applicationName": "${{ secrets.VULNERABILITY_APPLICATION_NAME }}", "securityToolId": "ae9964e847dd35504c2ce977746d43c4" }'
+    
+    - name: What's in the target directory
+      run: |
+            ls -a
+            cd target
+            ls -a
 
     # uncomment below code to trigger a Veracode scan and get the security results
     - name: Veracode Upload And Scan
