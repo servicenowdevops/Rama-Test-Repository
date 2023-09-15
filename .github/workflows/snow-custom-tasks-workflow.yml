@@ -15,14 +15,14 @@ name: GitHub Actions workflow with SNOW custom tasks
 #     types: [opened, synchronize, reopened]
 
 
-on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-    types: [opened, synchronize, reopened]
+# on:
+#   push:
+#     branches: [ "main" ]
+#   pull_request:
+#     branches: [ "main" ]
+#     types: [opened, synchronize, reopened]
 
-# on: workflow_dispatch
+on: workflow_dispatch
 #  pull_request_target:
 #    types:
 #      - closed
