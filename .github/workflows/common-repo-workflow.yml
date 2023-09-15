@@ -103,7 +103,7 @@ jobs:
         # Repository name with owner. For example, actions/checkout
         repository: # optional, default is ${{ github.repository }}
 
-    # uncomment below lines of code to trigger a new scan        
+    # uncomment below lines of code to trigger a new Sonar scan        
     # - name: Sonar Cloud Analysis
     #   if: success() # always() failure() success()
     #   run: >
@@ -151,7 +151,7 @@ jobs:
         # Repository name with owner. For example, actions/checkout
         repository: # optional, default is ${{ github.repository }}
 
-    # uncomment below lines of code to trigger a Veracode scan
+    # uncomment below lines of code to trigger a new Veracode scan
     # - name: Veracode Upload And Scan
     #   uses: veracode/veracode-uploadandscan-action@0.2.6
     #   with:
